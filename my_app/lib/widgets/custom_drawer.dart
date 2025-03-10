@@ -30,58 +30,69 @@ class CustomDrawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.lightBlueAccent,
-                    Color.fromARGB(221, 134, 70, 70),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+            // DrawerHeader(
+            //   decoration: const BoxDecoration(
+            //     gradient: LinearGradient(
+            //       colors: [
+            //         Colors.lightBlueAccent,
+            //         Color.fromARGB(221, 134, 70, 70),
+            //       ],
+            //       begin: Alignment.topLeft,
+            //       end: Alignment.bottomRight,
+            //     ),
+            //   ),
+            //   child: Center(
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         Text(
+            //           'MicroFlux',
+            //           style: GoogleFonts.outfit(
+            //             fontSize: 24,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //         Text(
+            //           'There\'s no Exit',
+            //           style: GoogleFonts.outfit(
+            //             fontSize: 15,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // Profile Section
+            UserAccountsDrawerHeader(
+              accountName: Text('John Doe'),
+              accountEmail: Text('john.doe@example.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                ), // Replace with actual image URL or asset
               ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'MicroFlux',
-                      style: GoogleFonts.outfit(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      'There\'s no Exit',
-                      style: GoogleFonts.outfit(
-                        fontSize: 15,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              decoration: BoxDecoration(color: Colors.blue),
             ),
             _buildDrawerItem(
-              Icons.checklist,
-              'To-Do List',
+              Icons.description,
+              'Clearance',
               0,
               context,
               onItemTapped,
               Responsive.isTablet(context) || Responsive.isDesktop(context),
             ),
             _buildDrawerItem(
-              Icons.message,
-              'SMS',
+              Icons.edit_document,
+              'Requirements',
               1,
               context,
               onItemTapped,
               Responsive.isTablet(context) || Responsive.isDesktop(context),
             ),
             _buildDrawerItem(
-              Icons.person,
-              'Profile',
+              Icons.settings,
+              'Settings',
               2,
               context,
               onItemTapped,

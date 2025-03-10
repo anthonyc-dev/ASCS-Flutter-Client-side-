@@ -48,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           // Prevents overflow when keyboard appears
-          reverse: true,
+          // reverse: true,
           physics: BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,6 +72,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return Column(
                         children: [
                           TextFieldInput(
+                            icon: Icons.badge,
+                            textEditingController: _userController,
+                            hintText: 'Enter your id number',
+                            textInputType: TextInputType.text,
+                            width: textFieldWidth, // Pass the calculated width
+                          ),
+                          TextFieldInput(
                             icon: Icons.person,
                             textEditingController: _userController,
                             hintText: 'Enter your username',
@@ -79,9 +86,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             width: textFieldWidth, // Pass the calculated width
                           ),
                           TextFieldInput(
+                            icon: Icons.email,
+                            textEditingController: _passwordController,
+                            hintText: 'Enter your email',
+                            textInputType: TextInputType.emailAddress,
+                            isPass: true,
+                            width: textFieldWidth, // Pass the calculated width
+                          ),
+                          TextFieldInput(
+                            icon: Icons.call,
+                            textEditingController: _passwordController,
+                            hintText: 'Enter your phone number',
+                            textInputType: TextInputType.text,
+                            isPass: true,
+                            width: textFieldWidth, // Pass the calculated width
+                          ),
+                          TextFieldInput(
                             icon: Icons.lock,
                             textEditingController: _passwordController,
                             hintText: 'Enter your password',
+                            textInputType: TextInputType.text,
+                            isPass: true,
+                            width: textFieldWidth, // Pass the calculated width
+                          ),
+                          TextFieldInput(
+                            icon: Icons.lock,
+                            textEditingController: _passwordController,
+                            hintText: 'Confirm your password',
                             textInputType: TextInputType.text,
                             isPass: true,
                             width: textFieldWidth, // Pass the calculated width
@@ -104,7 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return SizedBox(
                         // Set width for button
                         child: CustomButton(
-                          text: 'Log In',
+                          text: 'Sign Up',
                           icon: Icons.touch_app,
                           color: Colors.blue,
                           onPressed: () {

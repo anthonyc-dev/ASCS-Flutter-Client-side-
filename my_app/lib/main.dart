@@ -7,7 +7,7 @@ import 'package:my_app/screens/home_screen.dart';
 import 'package:my_app/utils/screen_size.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter bindings
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
   runApp(const MyApp());
@@ -20,10 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       // Base size for UI design (adjust if needed)
-      designSize:
-          ScreenSizeUtil().getDesignSize(), // Dynamically get screen size
-      minTextAdapt: true, // Adjusts text scaling
-      splitScreenMode: true, // Supports split screen
+      designSize: ScreenSizeUtil().getDesignSize(),
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
