@@ -20,8 +20,8 @@ class CustomBottomNavigation extends StatelessWidget {
       height: 60,
       index: selectedIndex,
       items: const [
-        Icon(Icons.checklist, size: 30, color: Colors.white),
-        Icon(Icons.message, size: 30, color: Colors.white),
+        Icon(Icons.description, size: 30, color: Colors.white),
+        Icon(Icons.edit_document, size: 30, color: Colors.white),
         Icon(Icons.person, size: 30, color: Colors.white),
       ],
       onTap: onItemTapped,

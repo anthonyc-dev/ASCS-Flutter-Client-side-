@@ -35,8 +35,7 @@ class BuildDesktopLayout extends StatelessWidget {
                           .contain, // Ensures the image maintains its aspect ratio
                 )
                 : null,
-        elevation:
-            Responsive.isDesktop(context) ? 4.0 : 0.0, // Increases shadow depth
+        elevation: Responsive.isDesktop(context) ? 4.0 : 0.0,
         shadowColor:
             Responsive.isDesktop(context)
                 ? Colors.black.withOpacity(0.5)

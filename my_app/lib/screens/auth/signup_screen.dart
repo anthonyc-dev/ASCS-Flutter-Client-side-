@@ -15,6 +15,9 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _cpasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   void _signUp() async {
     String username = _userController.text.trim();
@@ -63,11 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     builder: (context, constraints) {
                       // Adjust width for desktop-sized screens (e.g., width > 600)
                       double width = constraints.maxWidth;
-                      double textFieldWidth =
-                          width > 600
-                              ? 400
-                              : width *
-                                  0.9; // Use 80% of screen width or 400px for large screens
+                      double textFieldWidth = width > 600 ? 400 : width * 0.9;
 
                       return Column(
                         children: [
@@ -76,30 +75,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textEditingController: _userController,
                             hintText: 'Enter your id number',
                             textInputType: TextInputType.text,
-                            width: textFieldWidth, // Pass the calculated width
+                            width: textFieldWidth,
                           ),
-                          TextFieldInput(
-                            icon: Icons.person,
-                            textEditingController: _userController,
-                            hintText: 'Enter your username',
-                            textInputType: TextInputType.text,
-                            width: textFieldWidth, // Pass the calculated width
-                          ),
+
                           TextFieldInput(
                             icon: Icons.email,
-                            textEditingController: _passwordController,
+                            textEditingController: _emailController,
                             hintText: 'Enter your email',
                             textInputType: TextInputType.emailAddress,
                             isPass: true,
-                            width: textFieldWidth, // Pass the calculated width
+                            width: textFieldWidth,
                           ),
                           TextFieldInput(
                             icon: Icons.call,
-                            textEditingController: _passwordController,
+                            textEditingController: _phoneController,
                             hintText: 'Enter your phone number',
                             textInputType: TextInputType.text,
                             isPass: true,
-                            width: textFieldWidth, // Pass the calculated width
+                            width: textFieldWidth,
                           ),
                           TextFieldInput(
                             icon: Icons.lock,
@@ -107,15 +100,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintText: 'Enter your password',
                             textInputType: TextInputType.text,
                             isPass: true,
-                            width: textFieldWidth, // Pass the calculated width
+                            width: textFieldWidth,
                           ),
                           TextFieldInput(
                             icon: Icons.lock,
-                            textEditingController: _passwordController,
+                            textEditingController: _cpasswordController,
                             hintText: 'Confirm your password',
                             textInputType: TextInputType.text,
                             isPass: true,
-                            width: textFieldWidth, // Pass the calculated width
+                            width: textFieldWidth,
                           ),
                         ],
                       );
@@ -126,11 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   LayoutBuilder(
                     builder: (context, constraints) {
                       double width = constraints.maxWidth;
-                      double buttonWidth =
-                          width > 600
-                              ? 400
-                              : width *
-                                  0.9; // Use 80% of screen width or 400px for large screens
+                      double buttonWidth = width > 600 ? 400 : width * 0.9;
 
                       return SizedBox(
                         // Set width for button

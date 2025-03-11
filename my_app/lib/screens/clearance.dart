@@ -13,29 +13,29 @@ class _ClearanceState extends State<Clearance> {
     {
       'courseCode': 'CS101',
       'section': 'A',
-      'requirements': 'Basic Math',
-      'instructor': 'Dr. Smith',
+      'requirements': 'Calculator program',
+      'instructor': 'Girly Aguilar',
       'status': 'Sign',
     },
     {
-      'courseCode': 'CS102',
+      'courseCode': 'CC107',
       'section': 'B',
-      'requirements': 'None',
-      'instructor': 'Prof. Johnson',
+      'requirements': 'POS System',
+      'instructor': 'Shayne Llup',
       'status': 'In complete',
     },
     {
-      'courseCode': 'CS103',
+      'courseCode': 'SE101',
       'section': 'A',
-      'requirements': 'CS101',
-      'instructor': 'Dr. Adams',
+      'requirements': 'Hardware System',
+      'instructor': 'Jone Casipong',
       'status': 'Sign',
     },
     {
-      'courseCode': 'CS104',
+      'courseCode': 'CS Elect 1',
       'section': 'C',
-      'requirements': 'CS102',
-      'instructor': 'Dr. Clark',
+      'requirements': 'CS101',
+      'instructor': 'Rosalyn Luzon',
       'status': 'Missing',
     },
     // Add more dummy data as needed
@@ -65,115 +65,98 @@ class _ClearanceState extends State<Clearance> {
         title: const Text('Clearance'),
         leading: Icon(Icons.school),
       ),
-      body: Center(
+      body: SizedBox(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Container(
-            width: double.infinity, // Full width
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 3,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child:
-                isMobile
-                    ? ListView.builder(
-                      itemCount: courseData.length,
-                      itemBuilder: (context, index) {
-                        final course = courseData[index];
+          child:
+              isMobile
+                  ? ListView.builder(
+                    itemCount: courseData.length,
+                    itemBuilder: (context, index) {
+                      final course = courseData[index];
 
-                        // Get the color based on the status
-                        Color statusColor = getStatusColor(course['status']!);
+                      // Get the color based on the status
+                      Color statusColor = getStatusColor(course['status']!);
 
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            elevation: 3,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Course Code: ${course['courseCode']}',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          elevation: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Course Code: ${course['courseCode']}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  const SizedBox(height: 8),
-                                  Text('Section: ${course['section']}'),
-                                  Text(
-                                    'Requirements: ${course['requirements']}',
-                                  ),
-                                  Text('Instructor: ${course['instructor']}'),
-                                  Row(
-                                    children: [
-                                      const Text('Status: '),
-                                      Text(
-                                        course['status']!,
-                                        style: TextStyle(
-                                          color:
-                                              statusColor, // Apply color to status only
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                    : SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                        columnSpacing: 20, // Adjust column spacing
-                        headingRowColor: MaterialStateProperty.all(
-                          Colors.blueAccent,
-                        ), // Header background color
-                        columns: const [
-                          DataColumn(label: Text('Course Code')),
-                          DataColumn(label: Text('Section')),
-                          DataColumn(label: Text('Requirements')),
-                          DataColumn(label: Text('Instructor')),
-                          DataColumn(label: Text('Status')),
-                        ],
-                        rows:
-                            courseData.map((course) {
-                              // Get the color based on the status
-                              Color statusColor = getStatusColor(
-                                course['status']!,
-                              );
-
-                              return DataRow(
-                                cells: [
-                                  DataCell(Text(course['courseCode']!)),
-                                  DataCell(Text(course['section']!)),
-                                  DataCell(Text(course['requirements']!)),
-                                  DataCell(Text(course['instructor']!)),
-                                  DataCell(
+                                ),
+                                const SizedBox(height: 8),
+                                Text('Section: ${course['section']}'),
+                                Text('Requirements: ${course['requirements']}'),
+                                Text('Instructor: ${course['instructor']}'),
+                                Row(
+                                  children: [
+                                    const Text('Status: '),
                                     Text(
                                       course['status']!,
                                       style: TextStyle(
-                                        color: statusColor,
-                                      ), // Apply color to status only
+                                        color:
+                                            statusColor, // Apply color to status only
+                                      ),
                                     ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                  : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: 20, // Adjust column spacing
+                      headingRowColor: WidgetStateProperty.all(
+                        Colors.blueAccent,
+                      ), // Header background color
+                      columns: const [
+                        DataColumn(label: Text('Course Code')),
+                        DataColumn(label: Text('Section')),
+                        DataColumn(label: Text('Requirements')),
+                        DataColumn(label: Text('Instructor')),
+                        DataColumn(label: Text('Status')),
+                      ],
+                      rows:
+                          courseData.map((course) {
+                            // Get the color based on the status
+                            Color statusColor = getStatusColor(
+                              course['status']!,
+                            );
+
+                            return DataRow(
+                              cells: [
+                                DataCell(Text(course['courseCode']!)),
+                                DataCell(Text(course['section']!)),
+                                DataCell(Text(course['requirements']!)),
+                                DataCell(Text(course['instructor']!)),
+                                DataCell(
+                                  Text(
+                                    course['status']!,
+                                    style: TextStyle(
+                                      color: statusColor,
+                                    ), // Apply color to status only
                                   ),
-                                ],
-                              );
-                            }).toList(),
-                      ),
+                                ),
+                              ],
+                            );
+                          }).toList(),
                     ),
-          ),
+                  ),
         ),
       ),
     );
