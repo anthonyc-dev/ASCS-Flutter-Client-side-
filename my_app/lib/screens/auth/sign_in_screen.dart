@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           TextFieldInput(
                             icon: Icons.person,
                             textEditingController: _userController,
-                            hintText: 'Enter your username',
+                            hintText: 'Enter your id number',
                             textInputType: TextInputType.text,
                             width: textFieldWidth, // Pass the calculated width
                           ),

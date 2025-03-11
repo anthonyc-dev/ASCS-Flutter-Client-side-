@@ -21,7 +21,7 @@ class BuildMobileLayout extends StatelessWidget {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          'To-Do & SMS App',
+          '',
           style: GoogleFonts.outfit(fontWeight: FontWeight.normal),
         ),
       ),
