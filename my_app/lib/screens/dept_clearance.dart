@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/inst_clearance.dart';
 
-class Clearance extends StatefulWidget {
-  const Clearance({super.key});
+class DeptClearance extends StatefulWidget {
+  const DeptClearance({super.key});
 
   @override
-  State<Clearance> createState() => _ClearanceState();
+  State<DeptClearance> createState() => _DeptClearanceState();
 }
 
-class _ClearanceState extends State<Clearance>
+class _DeptClearanceState extends State<DeptClearance>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -63,6 +64,13 @@ class _ClearanceState extends State<Clearance>
     super.initState();
     // Initialize the TabController
     _tabController = TabController(length: 2, vsync: this);
+
+    // Listen for tab changes
+    _tabController.addListener(() {
+      setState(() {
+        // Rebuild the widget to update AppBar title when tab changes
+      });
+    });
   }
 
   @override
@@ -76,14 +84,22 @@ class _ClearanceState extends State<Clearance>
     // Check the screen width to decide the layout
     bool isMobile = MediaQuery.of(context).size.width < 600;
 
+    // Determine AppBar title based on the selected tab
+    String appBarTitle =
+        _tabController.index == 0
+            ? 'Department Clearance'
+            : 'Institutional Clearance';
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Clearance'),
+        title: Text(appBarTitle),
         leading: const Icon(Icons.school),
         bottom: TabBar(
-          indicatorColor: Colors.blue, // Set the indicator color to blue
+          // indicator: BoxDecoration(),
+          indicatorColor: Colors.blue,
           labelColor: Colors.blue,
           controller: _tabController,
+
           tabs: [
             Tab(
               child: LayoutBuilder(
@@ -98,19 +114,6 @@ class _ClearanceState extends State<Clearance>
                           const SizedBox(
                             height: 8,
                           ), // Space between icon and text
-                          Expanded(
-                            // This ensures the text fits without overflow
-                            child: Text(
-                              'Department Clearance',
-                              style: TextStyle(
-                                fontSize: 12, // Adjust text size for mobile
-                              ),
-                              overflow:
-                                  TextOverflow
-                                      .ellipsis, // Truncate text if necessary
-                              maxLines: 1, // Limit to 1 line of text
-                            ),
-                          ),
                         ],
                       )
                       : Row(
@@ -122,22 +125,11 @@ class _ClearanceState extends State<Clearance>
                           const SizedBox(
                             width: 8,
                           ), // Space between icon and text
-                          Text(
-                            'Department Clearance',
-                            style: TextStyle(
-                              fontSize: 16, // Adjust text size for desktop
-                            ),
-                            overflow:
-                                TextOverflow
-                                    .ellipsis, // Truncate text if necessary
-                            maxLines: 1, // Limit to 1 line of text
-                          ),
                         ],
                       );
                 },
               ),
             ),
-
             Tab(
               child: LayoutBuilder(
                 builder: (context, constraints) {
@@ -151,19 +143,6 @@ class _ClearanceState extends State<Clearance>
                           const SizedBox(
                             height: 8,
                           ), // Space between icon and text
-                          Expanded(
-                            // This ensures the text fits without overflow
-                            child: Text(
-                              'Institunal Clearance',
-                              style: TextStyle(
-                                fontSize: 12, // Adjust text size for mobile
-                              ),
-                              overflow:
-                                  TextOverflow
-                                      .ellipsis, // Truncate text if necessary
-                              maxLines: 1, // Limit to 1 line of text
-                            ),
-                          ),
                         ],
                       )
                       : Row(
@@ -171,20 +150,10 @@ class _ClearanceState extends State<Clearance>
                             MainAxisSize
                                 .min, // Ensures the row takes only the necessary space
                         children: [
-                          Icon(Icons.business),
+                          Icon(Icons.account_balance),
                           const SizedBox(
                             width: 8,
                           ), // Space between icon and text
-                          Text(
-                            'Institunal Clearance',
-                            style: TextStyle(
-                              fontSize: 16, // Adjust text size for desktop
-                            ),
-                            overflow:
-                                TextOverflow
-                                    .ellipsis, // Truncate text if necessary
-                            maxLines: 1, // Limit to 1 line of text
-                          ),
                         ],
                       );
                 },
@@ -294,7 +263,7 @@ class _ClearanceState extends State<Clearance>
                 ),
 
             // Institutional Clearance Tab
-            Center(child: Text("Institutional Clearance Content Here")),
+            Center(child: InstClearance()),
           ],
         ),
       ),

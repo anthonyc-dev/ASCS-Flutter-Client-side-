@@ -27,7 +27,17 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'ASCS',
-          theme: ThemeData(primarySwatch: Colors.blue),
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            textTheme: TextTheme(
+              bodyLarge: TextStyle(fontFamily: 'Outfit'),
+              bodyMedium: TextStyle(fontFamily: 'Outfit'),
+              displayLarge: TextStyle(fontFamily: 'Outfit'),
+              displayMedium: TextStyle(fontFamily: 'Outfit'),
+              // Add other styles here as needed
+            ),
+          ),
+
           initialRoute: '/signin',
           routes: {
             '/home': (context) => const HomeScreen(),

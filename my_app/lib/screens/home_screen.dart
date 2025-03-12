@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/layouts/build_mobile_layout.dart';
 import 'package:my_app/layouts/build_desktop_layout.dart';
-import 'package:my_app/screens/clearance.dart';
+import 'package:my_app/screens/dept_clearance.dart';
 import 'package:my_app/screens/profile_screen.dart';
 import 'package:my_app/screens/sms_screen.dart';
 
@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [Clearance(), SmsScreen(), ProfileScreen()];
+  final List<Widget> _screens = [DeptClearance(), SmsScreen(), ProfileScreen()];
 
   void _onItemTapped(int index) {
     setState(() {
