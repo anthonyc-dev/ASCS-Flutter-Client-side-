@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_app/screens/auth/sign_in_screen.dart';
 import 'package:my_app/screens/auth/signup_screen.dart';
+import 'package:my_app/screens/events.dart';
 import 'package:my_app/screens/home_dashboard.dart';
 import 'package:my_app/screens/home_screen.dart';
 import 'package:my_app/utils/screen_size.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
             '/home': (context) => const HomeScreen(),
             '/signin': (context) => const SignInScreen(),
             '/signup': (context) => const SignUpScreen(),
+            '/event': (context) => const Event(),
           },
         );
       },

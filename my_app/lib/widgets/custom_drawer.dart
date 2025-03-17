@@ -75,9 +75,17 @@ class CustomDrawer extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.blue),
             ),
             _buildDrawerItem(
-              Icons.description,
+              Icons.home,
               'Home',
               0,
+              context,
+              onItemTapped,
+              Responsive.isTablet(context) || Responsive.isDesktop(context),
+            ),
+            _buildDrawerItem(
+              Icons.event,
+              'Event',
+              '/event',
               context,
               onItemTapped,
               Responsive.isTablet(context) || Responsive.isDesktop(context),
@@ -116,17 +124,26 @@ class CustomDrawer extends StatelessWidget {
 Widget _buildDrawerItem(
   IconData icon,
   String title,
-  int index,
+  dynamic
+  navigationTarget, // This can be either an index (int) or a route (String)
   BuildContext context,
-  Function(int) onItemTapped,
+  Function(int)
+  onItemTapped, // Keep the original onItemTapped for index-based navigation
   bool isDesktop,
 ) {
   return ListTile(
     leading: Icon(icon),
     title: Text(title, style: GoogleFonts.outfit()),
     onTap: () {
-      if (!isDesktop) Navigator.pop(context); // Only close drawer on mobile
-      onItemTapped(index);
+      if (!isDesktop) Navigator.pop(context); // Close drawer on mobile
+
+      if (navigationTarget is int) {
+        // If navigationTarget is an index, call the onItemTapped function
+        onItemTapped(navigationTarget);
+      } else if (navigationTarget is String) {
+        // If navigationTarget is a route (String), navigate using Navigator.pushNamed
+        Navigator.pushNamed(context, navigationTarget);
+      }
     },
   );
 }

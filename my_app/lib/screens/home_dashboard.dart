@@ -35,7 +35,7 @@ class HomeDashboard extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.deepPurple, Colors.purpleAccent],
+                colors: [Colors.blue, Colors.blueAccent],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -106,7 +106,7 @@ class DashboardCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 40, color: Colors.deepPurple),
+            Icon(icon, size: 40, color: Colors.blue),
             const SizedBox(height: 10),
             Text(
               title,
