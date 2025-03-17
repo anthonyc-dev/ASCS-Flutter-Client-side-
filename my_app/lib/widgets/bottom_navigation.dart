@@ -13,18 +13,22 @@ class CustomBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CurvedNavigationBar(
-      backgroundColor: Colors.transparent,
-      color: Colors.blueAccent,
-      animationDuration: const Duration(milliseconds: 300),
-      height: 60,
-      index: selectedIndex,
-      items: const [
-        Icon(Icons.description, size: 30, color: Colors.white),
-        Icon(Icons.edit_document, size: 30, color: Colors.white),
-        Icon(Icons.person, size: 30, color: Colors.white),
-      ],
-      onTap: onItemTapped,
+    return SizedBox(
+      height: 100.0,
+      child: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color: Colors.blueAccent,
+        animationDuration: const Duration(milliseconds: 300),
+        height: 60,
+        index: selectedIndex,
+        items: const [
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.description, size: 30, color: Colors.white),
+          Icon(Icons.edit_document, size: 30, color: Colors.white),
+          Icon(Icons.person, size: 30, color: Colors.white),
+        ],
+        onTap: onItemTapped,
+      ),
     );
   }
 }

@@ -85,81 +85,103 @@ class _DeptClearanceState extends State<DeptClearance>
     bool isMobile = MediaQuery.of(context).size.width < 600;
 
     // Determine AppBar title based on the selected tab
-    String appBarTitle =
-        _tabController.index == 0
-            ? 'Department Clearance'
-            : 'Institutional Clearance';
+    // String appBarTitle =
+    //     _tabController.index == 0
+    //         ? 'Department Clearance'
+    //         : 'Institutional Clearance';
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(appBarTitle),
-        leading: const Icon(Icons.school),
-        bottom: TabBar(
-          // indicator: BoxDecoration(),
-          indicatorColor: Colors.blue,
-          labelColor: Colors.blue,
-          controller: _tabController,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: AppBar(
+          // title: Text(appBarTitle),
+          // leading: const Icon(Icons.school),
+          // backgroundColor: Colors.blue,
+          bottom: TabBar(
+            // indicator: BoxDecoration(),
+            indicatorColor: Colors.blue,
+            labelColor: Colors.blue,
+            controller: _tabController,
 
-          tabs: [
-            Tab(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return isMobile
-                      ? Column(
-                        mainAxisSize:
-                            MainAxisSize
-                                .min, // Ensures it only takes necessary space
-                        children: [
-                          Icon(Icons.business),
-                          const SizedBox(
-                            height: 8,
-                          ), // Space between icon and text
-                        ],
-                      )
-                      : Row(
-                        mainAxisSize:
-                            MainAxisSize
-                                .min, // Ensures the row takes only the necessary space
-                        children: [
-                          Icon(Icons.business),
-                          const SizedBox(
-                            width: 8,
-                          ), // Space between icon and text
-                        ],
-                      );
-                },
+            tabs: [
+              Tab(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return isMobile
+                        ? SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize:
+                                MainAxisSize
+                                    .min, // Ensures it only takes necessary space
+                            children: [
+                              Icon(Icons.business),
+                              Text(
+                                "Department Clearance",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ), // Adjust the font size as needed
+                              ),
+
+                              const SizedBox(
+                                height: 8,
+                              ), // Space between icon and text
+                            ],
+                          ),
+                        )
+                        : Row(
+                          mainAxisSize:
+                              MainAxisSize
+                                  .min, // Ensures the row takes only the necessary space
+                          children: [
+                            Icon(Icons.business),
+                            const SizedBox(
+                              width: 8,
+                            ), // Space between icon and text
+                          ],
+                        );
+                  },
+                ),
               ),
-            ),
-            Tab(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return isMobile
-                      ? Column(
-                        mainAxisSize:
-                            MainAxisSize
-                                .min, // Ensures it only takes necessary space
-                        children: [
-                          Icon(Icons.account_balance),
-                          const SizedBox(
-                            height: 8,
-                          ), // Space between icon and text
-                        ],
-                      )
-                      : Row(
-                        mainAxisSize:
-                            MainAxisSize
-                                .min, // Ensures the row takes only the necessary space
-                        children: [
-                          Icon(Icons.account_balance),
-                          const SizedBox(
-                            width: 8,
-                          ), // Space between icon and text
-                        ],
-                      );
-                },
+              Tab(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return isMobile
+                        ? SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize:
+                                MainAxisSize
+                                    .min, // Ensures it only takes necessary space
+                            children: [
+                              Icon(Icons.account_balance),
+                              Text(
+                                "Institutinal Clearance",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ), // Adjust the font size as needed
+                              ),
+
+                              const SizedBox(
+                                height: 8,
+                              ), // Space between icon and text
+                            ],
+                          ),
+                        )
+                        : Row(
+                          mainAxisSize:
+                              MainAxisSize
+                                  .min, // Ensures the row takes only the necessary space
+                          children: [
+                            Icon(Icons.account_balance),
+                            const SizedBox(
+                              width: 8,
+                            ), // Space between icon and text
+                          ],
+                        );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       body: Padding(

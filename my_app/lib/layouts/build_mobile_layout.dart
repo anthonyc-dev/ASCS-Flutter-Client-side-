@@ -24,6 +24,14 @@ class BuildMobileLayout extends StatelessWidget {
           '',
           style: GoogleFonts.outfit(fontWeight: FontWeight.normal),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Add your notification logic here
+            },
+          ),
+        ],
       ),
       drawer: CustomDrawer(onItemTapped: onItemTapped),
       body: screens[selectedIndex],

@@ -76,8 +76,16 @@ class CustomDrawer extends StatelessWidget {
             ),
             _buildDrawerItem(
               Icons.description,
-              'Clearance',
+              'Home',
               0,
+              context,
+              onItemTapped,
+              Responsive.isTablet(context) || Responsive.isDesktop(context),
+            ),
+            _buildDrawerItem(
+              Icons.description,
+              'Clearance',
+              1,
               context,
               onItemTapped,
               Responsive.isTablet(context) || Responsive.isDesktop(context),
@@ -85,7 +93,7 @@ class CustomDrawer extends StatelessWidget {
             _buildDrawerItem(
               Icons.edit_document,
               'Requirements',
-              1,
+              2,
               context,
               onItemTapped,
               Responsive.isTablet(context) || Responsive.isDesktop(context),
@@ -93,7 +101,7 @@ class CustomDrawer extends StatelessWidget {
             _buildDrawerItem(
               Icons.settings,
               'Settings',
-              2,
+              3,
               context,
               onItemTapped,
               Responsive.isTablet(context) || Responsive.isDesktop(context),
