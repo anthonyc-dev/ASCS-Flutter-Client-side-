@@ -10,7 +10,7 @@ class Event extends StatelessWidget {
     String eventName = "Parents Meeting";
     String venue = "NCMC Gym";
     String description =
-        "Please tell your parents about the upcoming meeting. Attendance is a must..";
+        "Please tell your parents about the upcoming meeting. Attendance is a must.";
     DateTime startDate = DateTime(2025, 4, 10, 18, 30); // Start Date with Time
     DateTime endDate = DateTime(2025, 4, 12, 22, 0); // End Date with Time
 
@@ -27,52 +27,61 @@ class Event extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Event Name with Icon
-              _buildDetailText(
-                label: 'Event Name',
-                value: eventName,
-                icon: Icons.event,
-              ),
-              const SizedBox(height: 16),
+          child: Card(
+            elevation: 5.0, // Add shadow to the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.0), // Rounded corners
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Event Name with Icon
+                  _buildDetailText(
+                    label: 'Event Name',
+                    value: eventName,
+                    icon: Icons.event,
+                  ),
+                  const SizedBox(height: 16),
 
-              // Start Date and Time with Icon
-              _buildDetailText(
-                label: 'Start Date & Time',
-                value:
-                    '${dateFormat.format(startDate)} ${timeFormat.format(startDate)}',
-                icon: Icons.calendar_today,
-              ),
-              const SizedBox(height: 16),
+                  // Start Date and Time with Icon
+                  _buildDetailText(
+                    label: 'Start Date & Time',
+                    value:
+                        '${dateFormat.format(startDate)} ${timeFormat.format(startDate)}',
+                    icon: Icons.calendar_today,
+                  ),
+                  const SizedBox(height: 16),
 
-              // End Date and Time with Icon
-              _buildDetailText(
-                label: 'End Date & Time',
-                value:
-                    '${dateFormat.format(endDate)} ${timeFormat.format(endDate)}',
-                icon: Icons.calendar_today,
-              ),
-              const SizedBox(height: 16),
+                  // End Date and Time with Icon
+                  _buildDetailText(
+                    label: 'End Date & Time',
+                    value:
+                        '${dateFormat.format(endDate)} ${timeFormat.format(endDate)}',
+                    icon: Icons.calendar_today,
+                  ),
+                  const SizedBox(height: 16),
 
-              // Venue with Icon
-              _buildDetailText(
-                label: 'Venue',
-                value: venue,
-                icon: Icons.location_on,
-              ),
-              const SizedBox(height: 16),
+                  // Venue with Icon
+                  _buildDetailText(
+                    label: 'Venue',
+                    value: venue,
+                    icon: Icons.location_on,
+                  ),
+                  const SizedBox(height: 16),
 
-              // Description with Icon
-              _buildDetailText(
-                label: 'Description',
-                value: description,
-                icon: Icons.description,
-                maxLines: 5,
+                  // Description with Icon
+                  _buildDetailText(
+                    label: 'Description',
+                    value: description,
+                    icon: Icons.description,
+                    maxLines: 5,
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
-              const SizedBox(height: 20),
-            ],
+            ),
           ),
         ),
       ),
@@ -86,35 +95,21 @@ class Event extends StatelessWidget {
     required IconData icon,
     int maxLines = 1,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 6,
-            offset: const Offset(0, 4),
-          ),
-        ],
+    return ListTile(
+      leading: Icon(icon, color: Colors.blue),
+      title: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Colors.blue,
+        ),
       ),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.blue),
-        title: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-        ),
-        subtitle: Text(
-          value,
-          style: TextStyle(fontSize: 16, color: Colors.black.withOpacity(0.7)),
-          maxLines: maxLines,
-          overflow: TextOverflow.ellipsis,
-        ),
+      subtitle: Text(
+        value,
+        style: TextStyle(fontSize: 16, color: Colors.black.withOpacity(0.7)),
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
