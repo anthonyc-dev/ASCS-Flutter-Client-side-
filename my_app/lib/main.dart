@@ -6,6 +6,7 @@ import 'package:my_app/screens/auth/signup_screen.dart';
 import 'package:my_app/screens/events.dart';
 import 'package:my_app/screens/home_dashboard.dart';
 import 'package:my_app/screens/home_screen.dart';
+import 'package:my_app/screens/qr_code.dart';
 import 'package:my_app/utils/screen_size.dart';
 
 Future main() async {
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
             '/signin': (context) => const SignInScreen(),
             '/signup': (context) => const SignUpScreen(),
             '/event': (context) => const Event(),
+            '/qrcode': (context) => const QrCode(),
           },
         );
       },

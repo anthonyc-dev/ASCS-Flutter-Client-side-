@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/screens/inst_clearance.dart';
 
 class DeptClearance extends StatefulWidget {
@@ -117,7 +118,7 @@ class _DeptClearanceState extends State<DeptClearance>
                               Icon(Icons.business),
                               Text(
                                 "Department Clearance",
-                                style: TextStyle(
+                                style: GoogleFonts.outfit(
                                   fontSize: 12,
                                 ), // Adjust the font size as needed
                               ),
@@ -155,7 +156,7 @@ class _DeptClearanceState extends State<DeptClearance>
                               Icon(Icons.account_balance),
                               Text(
                                 "Institutinal Clearance",
-                                style: TextStyle(
+                                style: GoogleFonts.outfit(
                                   fontSize: 12,
                                 ), // Adjust the font size as needed
                               ),

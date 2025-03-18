@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart'; // For formatting dates
 
 class Event extends StatelessWidget {
@@ -20,7 +21,7 @@ class Event extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Event Details"),
+        title: Text("Event Details", style: GoogleFonts.outfit()),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
