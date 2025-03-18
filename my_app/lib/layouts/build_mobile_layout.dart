@@ -28,7 +28,7 @@ class BuildMobileLayout extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              // Add your notification logic here
+              Navigator.pushNamed(context, '/notif');
             },
           ),
         ],
