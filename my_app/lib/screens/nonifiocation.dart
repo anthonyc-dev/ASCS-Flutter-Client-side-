@@ -12,8 +12,8 @@ class NotificationScreen extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -24,7 +24,7 @@ class NotificationScreen extends StatelessWidget {
               message: 'The deadline for clearance has ended!',
               timestamp: 'Just Now',
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // Notification for Clearance Status
             NotificationCard(
@@ -61,7 +61,7 @@ class NotificationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             offset: Offset(0, 2),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InstClearance extends StatefulWidget {
   const InstClearance({super.key});
@@ -14,33 +15,35 @@ class _InstClearanceState extends State<InstClearance>
   // Dummy data for the table
   final List<Map<String, String>> courseData = [
     {
-      'inst_name': 'SOA',
-      'name': 'Mariam Christine Abilla',
+      'courseCode': 'SOA',
+      'section': 'A',
+      'instructor': 'Mariam Christine Abilla',
       'requirements': 'Sign by SGO and UMSA',
       'status': 'Sign',
     },
     {
-      'inst_name': 'Registrar',
-      'name': 'Salman Sultan',
+      'courseCode': 'Registrar',
+      'section': 'A',
+      'instructor': 'Salman Sultan',
       'requirements': 'Sign all Subject and form !#&',
       'status': 'In complete',
     },
     {
-      'inst_name': 'Tailoring',
-      'name': 'Bilinda Sahok',
+      'courseCode': 'Tailoring',
+      'section': 'A',
+      'instructor': 'Bilinda Sahok',
       'requirements': 'Ncmc Uniform and Student ID',
       'status': 'Sign',
     },
     {
-      'inst_name': 'Laboratory',
-      'name': 'Romel Etang',
+      'courseCode': 'Laboratory',
+      'section': 'A',
+      'instructor': 'Romel Etang',
       'requirements': 'One mouse and keyboard',
       'status': 'Missing',
     },
-    // Add more dummy data as needed
   ];
 
-  // Method to get color based on status
   Color getStatusColor(String status) {
     switch (status) {
       case 'Sign':
@@ -50,15 +53,30 @@ class _InstClearanceState extends State<InstClearance>
       case 'Missing':
         return Colors.red;
       default:
-        return Colors.black; // Default color
+        return Colors.black;
+    }
+  }
+
+  IconData getStatusIcon(String status) {
+    switch (status) {
+      case 'Sign':
+        return Icons.check_circle;
+      case 'In complete':
+        return Icons.pending;
+      case 'Missing':
+        return Icons.error;
+      default:
+        return Icons.info;
     }
   }
 
   @override
   void initState() {
     super.initState();
-    // Initialize the TabController
     _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -69,105 +87,234 @@ class _InstClearanceState extends State<InstClearance>
 
   @override
   Widget build(BuildContext context) {
-    // Check the screen width to decide the layout
+    final theme = Theme.of(context);
     bool isMobile = MediaQuery.of(context).size.width < 600;
 
-    return TabBarView(
-      controller: _tabController,
-      children: [
-        // Department Clearance Tab
-        isMobile
-            ? ListView.builder(
-              itemCount: courseData.length,
-              itemBuilder: (context, index) {
-                final course = courseData[index];
-                Color statusColor = getStatusColor(course['status']!);
+    return isMobile
+        ? ListView.builder(
+            itemCount: courseData.length,
+            itemBuilder: (context, index) {
+              final course = courseData[index];
+              Color statusColor = getStatusColor(course['status']!);
+              IconData statusIcon = getStatusIcon(course['status']!);
 
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              return Container(
+                margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            '${course['inst_name']}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text('Name: ${course['name']}'),
-                          Text('Requirements: ${course['requirements']}'),
-
                           Row(
                             children: [
-                              const Text('Status: '),
+                              const Icon(Icons.business, size: 20),
+                              const SizedBox(width: 8),
+                              Text(
+                                course['courseCode']!,
+                                style: GoogleFonts.outfit(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: statusColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  statusIcon,
+                                  color: statusColor,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  course['status']!,
+                                  style: GoogleFonts.outfit(
+                                    color: statusColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      _buildInfoRow('Section', course['section']!),
+                      _buildInfoRow('Requirements', course['requirements']!),
+                      _buildInfoRow('Instructor', course['instructor']!),
+                    ],
+                  ),
+                ),
+              );
+            },
+          )
+        : Container(
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                headingRowColor: MaterialStateProperty.all(
+                  theme.primaryColor,
+                ),
+                headingTextStyle: GoogleFonts.outfit(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+                dataRowColor: MaterialStateProperty.all(Colors.white),
+                columns: const [
+                  DataColumn(
+                    label: Row(
+                      children: [
+                        Icon(Icons.business, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text('Institution'),
+                      ],
+                    ),
+                  ),
+                  DataColumn(
+                    label: Row(
+                      children: [
+                        Icon(Icons.person, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text('Name'),
+                      ],
+                    ),
+                  ),
+                  DataColumn(
+                    label: Row(
+                      children: [
+                        Icon(Icons.assignment, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text('Requirements'),
+                      ],
+                    ),
+                  ),
+                  DataColumn(
+                    label: Row(
+                      children: [
+                        Icon(Icons.info, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text('Status'),
+                      ],
+                    ),
+                  ),
+                ],
+                rows: courseData.map((course) {
+                  Color statusColor = getStatusColor(course['status']!);
+                  IconData statusIcon = getStatusIcon(course['status']!);
+                  return DataRow(
+                    cells: [
+                      DataCell(Row(
+                        children: [
+                          const Icon(Icons.business, size: 16),
+                          const SizedBox(width: 8),
+                          Text(course['inst_name']!),
+                        ],
+                      )),
+                      DataCell(Row(
+                        children: [
+                          const Icon(Icons.person, size: 16),
+                          const SizedBox(width: 8),
+                          Text(course['name']!),
+                        ],
+                      )),
+                      DataCell(Row(
+                        children: [
+                          const Icon(Icons.assignment, size: 16),
+                          const SizedBox(width: 8),
+                          Text(course['requirements']!),
+                        ],
+                      )),
+                      DataCell(
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: statusColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                statusIcon,
+                                color: statusColor,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 4),
                               Text(
                                 course['status']!,
                                 style: TextStyle(color: statusColor),
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              },
-            )
-            : Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                  ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columnSpacing: 20,
-                  headingRowColor: MaterialStateProperty.all(Colors.blueAccent),
-                  columns: const [
-                    DataColumn(label: Text('Course Code')),
-                    DataColumn(label: Text('Section')),
-                    DataColumn(label: Text('Requirements')),
-                    DataColumn(label: Text('Instructor')),
-                    DataColumn(label: Text('Status')),
-                  ],
-                  rows:
-                      courseData.map((course) {
-                        Color statusColor = getStatusColor(course['status']!);
-
-                        return DataRow(
-                          cells: [
-                            DataCell(Text(course['inst_name']!)),
-                            DataCell(Text(course['name']!)),
-                            DataCell(Text(course['requirements']!)),
-                            DataCell(
-                              Text(
-                                course['status']!,
-                                style: TextStyle(color: statusColor),
-                              ),
-                            ),
-                          ],
-                        );
-                      }).toList(),
-                ),
+                    ],
+                  );
+                }).toList(),
               ),
             ),
+          );
+  }
 
-        // Institutional Clearance Tab
-        Center(child: InstClearance()),
-      ],
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Text(
+            '$label: ',
+            style: GoogleFonts.outfit(
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600],
+            ),
+          ),
+          Text(
+            value,
+            style: GoogleFonts.outfit(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
@@ -10,25 +9,36 @@ class CustomBottomNavigation extends StatelessWidget {
     required this.selectedIndex,
     required this.onItemTapped,
   });
-
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100.0,
-      child: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        color: Colors.blueAccent,
-        animationDuration: const Duration(milliseconds: 300),
-        height: 60,
-        index: selectedIndex,
-        items: const [
-          Icon(Icons.home, size: 30, color: Colors.white),
-          Icon(Icons.description, size: 30, color: Colors.white),
-          Icon(Icons.edit_document, size: 30, color: Colors.white),
-          Icon(Icons.person, size: 30, color: Colors.white),
-        ],
-        onTap: onItemTapped,
-      ),
+    return NavigationBar(
+      selectedIndex: selectedIndex,
+      onDestinationSelected: onItemTapped,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      indicatorColor: Theme.of(context).colorScheme.secondaryContainer,
+      // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+      destinations: const [
+        NavigationDestination(
+          icon: Icon(Icons.home_outlined),
+          selectedIcon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.description_outlined),
+          selectedIcon: Icon(Icons.description),
+          label: 'Clearances',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.event_available_outlined),
+          selectedIcon: Icon(Icons.event_available),
+          label: 'Events',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.person_outline),
+          selectedIcon: Icon(Icons.person),
+          label: 'Profile',
+        ),
+      ],
     );
   }
 }

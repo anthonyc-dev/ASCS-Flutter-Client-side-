@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Profile Icon (Avatar) with Shadow Effect
-            CircleAvatar(
+            const CircleAvatar(
               radius: 80,
               backgroundColor:
                   Colors.blueAccent, // Background color for the icon
@@ -23,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // User's Name
             Text(
@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // User's Bio
             Text(
@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.black54, // Slightly lighter color for the bio
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // Card with profile actions (buttons)
             Card(
@@ -73,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
 
                     // // Button/Action: View Projects
                     // TextButton(

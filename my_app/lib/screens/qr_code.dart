@@ -35,9 +35,9 @@ class QrCode extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Clearance Status Section - Positioned to the left
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Icon(
                   Icons.check_circle,
                   color: Colors.green, // Green icon to show "Cleared"
@@ -58,9 +58,9 @@ class QrCode extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Second Semester Section - Left aligned with an icon
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Icon(
                   Icons.school,
                   color: Colors.blue, // Blue icon for "Second Semester"
@@ -80,9 +80,9 @@ class QrCode extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Midterm Examination Section - Left aligned with an icon
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Icon(
                   Icons.assignment_turned_in,
                   color: Colors.orange, // Orange icon for "Midterm Examination"

@@ -19,10 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    HomeDashboard(),
-    DeptClearance(),
-    SmsScreen(),
-    ProfileScreen(),
+    const HomeDashboard(),
+    const DeptClearance(),
+    const SmsScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -43,14 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return isDesktop
         ? BuildDesktopLayout(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          screens: _screens,
-        )
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            screens: _screens,
+          )
         : BuildMobileLayout(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          screens: _screens,
-        );
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            screens: _screens,
+          );
   }
 }

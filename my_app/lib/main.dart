@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_app/screens/auth/sign_in_screen.dart';
 import 'package:my_app/screens/auth/signup_screen.dart';
+import 'package:my_app/screens/dashboard.dart';
 import 'package:my_app/screens/events.dart';
 import 'package:my_app/screens/home_dashboard.dart';
 import 'package:my_app/screens/home_screen.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           title: 'ASCS',
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            textTheme: TextTheme(
+            textTheme: const TextTheme(
               bodyLarge: TextStyle(fontFamily: 'Outfit'),
               bodyMedium: TextStyle(fontFamily: 'Outfit'),
               displayLarge: TextStyle(fontFamily: 'Outfit'),
@@ -41,8 +42,7 @@ class MyApp extends StatelessWidget {
               // Add other styles here as needed
             ),
           ),
-
-          initialRoute: '/signin',
+          initialRoute: '/home',
           routes: {
             '/homeDashboard': (context) => const HomeDashboard(),
             '/home': (context) => const HomeScreen(),
@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
             '/event': (context) => const Event(),
             '/qrcode': (context) => const QrCode(),
             '/notif': (context) => const NotificationScreen(),
+            '/dashboard': (context) => const DashboardScreen(),
           },
         );
       },

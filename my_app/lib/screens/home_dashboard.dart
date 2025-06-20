@@ -6,78 +6,109 @@ class HomeDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100], // Light background
-      // appBar: AppBar(
-      //   title: const Text(
-      //     "Dashboard",
-      //     style: TextStyle(fontWeight: FontWeight.bold),
-      //   ),
-      //   backgroundColor: Colors.deepPurple,
-      //   elevation: 0,
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.notifications, color: Colors.white),
-      //       onPressed: () {},
-      //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.only(right: 10),
-      //       child: CircleAvatar(
-      //         backgroundImage: NetworkImage("https://via.placeholder.com/150"),
-      //       ),
-      //     ),
-      //   ],
-      // ),
+      backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          // Header Card
+          // Enhanced Header Card
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.blue, Colors.blueAccent],
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF2196F3), Color(0xFF1976D2)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blue.withOpacity(0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Welcome Back NCMCIAN!",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                const SizedBox(height: 5),
-                const Text(
-                  "Here's your dashboard",
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Welcome Back NCMCIAN!",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          "Here's your dashboard",
+                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.blue[700],
+                        size: 30,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
 
-          // Grid Menu
+          // Enhanced Grid Menu
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
                 children: [
-                  DashboardCard(title: "Profile", icon: Icons.person),
-                  DashboardCard(title: "Settings", icon: Icons.settings),
-                  DashboardCard(title: "Clearance", icon: Icons.description),
-                  // DashboardCard(title: "Analytics", icon: Icons.bar_chart),
+                  DashboardCard(
+                    title: "Profile",
+                    icon: Icons.person,
+                    color: Colors.blue,
+                    onTap: () {},
+                  ),
+                  DashboardCard(
+                    title: "Settings",
+                    icon: Icons.settings,
+                    color: Colors.orange,
+                    onTap: () {},
+                  ),
+                  DashboardCard(
+                    title: "Clearance",
+                    icon: Icons.description,
+                    color: Colors.green,
+                    onTap: () {},
+                  ),
                   DashboardCard(
                     title: "Notifications",
                     icon: Icons.notifications,
+                    color: Colors.purple,
+                    onTap: () {},
                   ),
-                  DashboardCard(title: "Logout", icon: Icons.logout),
+                  DashboardCard(
+                    title: "Logout",
+                    icon: Icons.logout,
+                    color: Colors.red,
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
@@ -88,31 +119,61 @@ class HomeDashboard extends StatelessWidget {
   }
 }
 
-// Dashboard Card Widget
+// Enhanced Dashboard Card Widget
 class DashboardCard extends StatelessWidget {
   final String title;
   final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
 
-  const DashboardCard({super.key, required this.title, required this.icon});
+  const DashboardCard({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 8,
+      shadowColor: color.withOpacity(0.3),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: Colors.blue),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: LinearGradient(
+              colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, size: 35, color: color),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: color.withOpacity(0.8),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
