@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/screens/course_details.dart';
 import 'package:my_app/screens/inst_clearance.dart';
+import 'package:my_app/widgets/clearance/build_info_row.dart';
 
 class DeptClearance extends StatefulWidget {
   const DeptClearance({super.key});
@@ -18,31 +19,31 @@ class _DeptClearanceState extends State<DeptClearance>
   final List<Map<String, String>> courseData = [
     {
       'courseCode': 'CS101',
-      'section': 'A',
       'requirements': 'Calculator program',
       'instructor': 'Girly Aguilar',
       'status': 'Sign',
+      "dueDate": '2024-10-01',
     },
     {
       'courseCode': 'CC107',
-      'section': 'B',
       'requirements': 'POS System',
       'instructor': 'Shayne Llup',
       'status': 'In complete',
+      "dueDate": '2024-10-05',
     },
     {
       'courseCode': 'SE101',
-      'section': 'A',
       'requirements': 'Hardware System',
       'instructor': 'Jone Casipong',
       'status': 'Sign',
+      "dueDate": '2024-10-03',
     },
     {
       'courseCode': 'CS Elect 1',
-      'section': 'C',
       'requirements': 'CS101',
       'instructor': 'Rosalyn Luzon',
       'status': 'Missing',
+      "dueDate": '2024-10-07',
     },
   ];
 
@@ -93,10 +94,10 @@ class _DeptClearanceState extends State<DeptClearance>
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: theme.primaryColor,
+        backgroundColor: Colors.blue,
         title: Text(
           'Clearance',
           style: GoogleFonts.outfit(
@@ -146,7 +147,13 @@ class _DeptClearanceState extends State<DeptClearance>
           // Department Clearance Tab
           isMobile
               ? ListView.builder(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 16,
+                    bottom:
+                        100, // Add bottom margin to show content above bottom navigation
+                  ),
                   itemCount: courseData.length,
                   itemBuilder: (context, index) {
                     final course = courseData[index];
@@ -163,12 +170,18 @@ class _DeptClearanceState extends State<DeptClearance>
                           ),
                         );
                       },
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 2,
+                      child: Container(
                         margin: const EdgeInsets.only(bottom: 16),
-                        shape: RoundedRectangleBorder(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(16),
@@ -198,7 +211,7 @@ class _DeptClearanceState extends State<DeptClearance>
                                       vertical: 6,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: statusColor.withOpacity(0.1),
+                                      color: statusColor.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Row(
@@ -223,11 +236,21 @@ class _DeptClearanceState extends State<DeptClearance>
                                 ],
                               ),
                               const SizedBox(height: 12),
-                              _buildInfoRow('Section', course['section']!),
-                              _buildInfoRow(
-                                  'Requirements', course['requirements']!),
-                              _buildInfoRow(
-                                  'Instructor', course['instructor']!),
+                              InfoRow(
+                                icon: Icons.person,
+                                label: 'Instructor',
+                                value: course['instructor']!,
+                              ),
+                              InfoRow(
+                                icon: Icons.assignment,
+                                label: 'Requirements',
+                                value: course['requirements']!,
+                              ),
+                              InfoRow(
+                                icon: Icons.schedule,
+                                label: 'Due Date',
+                                value: course['dueDate']!,
+                              ),
                             ],
                           ),
                         ),
@@ -242,7 +265,7 @@ class _DeptClearanceState extends State<DeptClearance>
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -251,14 +274,14 @@ class _DeptClearanceState extends State<DeptClearance>
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                      headingRowColor: MaterialStateProperty.all(
+                      headingRowColor: WidgetStateProperty.all(
                         theme.primaryColor,
                       ),
                       headingTextStyle: GoogleFonts.outfit(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
-                      dataRowColor: MaterialStateProperty.all(Colors.white),
+                      dataRowColor: WidgetStateProperty.all(Colors.white),
                       columns: const [
                         DataColumn(
                           label: Row(
@@ -339,6 +362,13 @@ class _DeptClearanceState extends State<DeptClearance>
                                 Text(course['instructor']!),
                               ],
                             )),
+                            DataCell(Row(
+                              children: [
+                                const Icon(Icons.person, size: 16),
+                                const SizedBox(width: 8),
+                                Text(course['dueDate']!),
+                              ],
+                            )),
                             DataCell(
                               Container(
                                 padding: const EdgeInsets.symmetric(
@@ -346,7 +376,7 @@ class _DeptClearanceState extends State<DeptClearance>
                                   vertical: 6,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: statusColor.withOpacity(0.1),
+                                  color: statusColor.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Row(
@@ -374,28 +404,10 @@ class _DeptClearanceState extends State<DeptClearance>
                 ),
 
           // Institutional Clearance Tab
-          const Center(child: InstClearance()),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Text(
-            '$label: ',
-            style: GoogleFonts.outfit(
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
-          ),
-          Text(
-            value,
-            style: GoogleFonts.outfit(
-              fontWeight: FontWeight.w400,
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 16),
+              child: InstClearance(),
             ),
           ),
         ],

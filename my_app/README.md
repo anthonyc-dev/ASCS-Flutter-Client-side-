@@ -1,3 +1,9 @@
+## To make app build apk
+
+```bash
+   flutter build apk --release
+```
+
 # my_app
 
 A new Flutter project.

@@ -42,13 +42,13 @@ class MyApp extends StatelessWidget {
               // Add other styles here as needed
             ),
           ),
-          initialRoute: '/home',
+          initialRoute: '/home', //signin
           routes: {
             '/homeDashboard': (context) => const HomeDashboard(),
             '/home': (context) => const HomeScreen(),
             '/signin': (context) => const SignInScreen(),
             '/signup': (context) => const SignUpScreen(),
-            '/event': (context) => const Event(),
+            '/event': (context) => EventsPage(),
             '/qrcode': (context) => const QrCode(),
             '/notif': (context) => const NotificationScreen(),
             '/dashboard': (context) => const DashboardScreen(),

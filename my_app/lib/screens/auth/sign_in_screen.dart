@@ -13,24 +13,26 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() async {
-    String username = _userController.text.trim();
+    String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
     Authentication auth = Authentication();
     String result = await auth.login(
       context: context,
-      username: username,
+      email: email,
       password: password,
     );
+
+    if (!mounted) return;
 
     if (result != "Success") {
       showSnackBar(context, result);
 
-      _userController.clear();
+      _emailController.clear();
       _passwordController.clear();
     } else {
       // Show error message but do NOT navigate
@@ -48,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -62,17 +64,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     builder: (context, constraints) {
                       // Adjust width for desktop-sized screens (e.g., width > 600)
                       double width = constraints.maxWidth;
-                      double textFieldWidth =
-                          width > 600
-                              ? 400
-                              : width *
-                                  0.9; // Use 80% of screen width or 400px for large screens
+                      double textFieldWidth = width > 600
+                          ? 400
+                          : width *
+                              0.9; // Use 80% of screen width or 400px for large screens
 
                       return Column(
                         children: [
                           TextFieldInput(
                             icon: Icons.person,
-                            textEditingController: _userController,
+                            textEditingController: _emailController,
                             hintText: 'Enter your id number',
                             textInputType: TextInputType.text,
                             width: textFieldWidth, // Pass the calculated width
@@ -93,11 +94,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   LayoutBuilder(
                     builder: (context, constraints) {
                       double width = constraints.maxWidth;
-                      double buttonWidth =
-                          width > 600
-                              ? 400
-                              : width *
-                                  0.9; // Use 80% of screen width or 400px for large screens
+                      double buttonWidth = width > 600
+                          ? 400
+                          : width *
+                              0.9; // Use 80% of screen width or 400px for large screens
 
                       return SizedBox(
                         // Set width for button
@@ -141,10 +141,10 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 60),
               MediaQuery.of(context).viewInsets.bottom == 0
                   ? Image.asset(
-                    'images/mobile.png',
-                    fit: BoxFit.contain,
-                    height: height * 0.15,
-                  )
+                      'images/mobile.png',
+                      fit: BoxFit.contain,
+                      height: height * 0.15,
+                    )
                   : const SizedBox(),
             ],
           ),

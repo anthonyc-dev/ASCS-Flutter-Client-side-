@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/widgets/clearance/build_info_row.dart';
 
 class InstClearance extends StatefulWidget {
   const InstClearance({super.key});
@@ -16,31 +17,31 @@ class _InstClearanceState extends State<InstClearance>
   final List<Map<String, String>> courseData = [
     {
       'courseCode': 'SOA',
-      'section': 'A',
       'instructor': 'Mariam Christine Abilla',
       'requirements': 'Sign by SGO and UMSA',
       'status': 'Sign',
+      "dueDate": '2024-10-01',
     },
     {
       'courseCode': 'Registrar',
-      'section': 'A',
       'instructor': 'Salman Sultan',
       'requirements': 'Sign all Subject and form !#&',
       'status': 'In complete',
+      "dueDate": '2024-10-05',
     },
     {
       'courseCode': 'Tailoring',
-      'section': 'A',
       'instructor': 'Bilinda Sahok',
       'requirements': 'Ncmc Uniform and Student ID',
       'status': 'Sign',
+      "dueDate": '2024-10-03',
     },
     {
       'courseCode': 'Laboratory',
-      'section': 'A',
       'instructor': 'Romel Etang',
       'requirements': 'One mouse and keyboard',
       'status': 'Missing',
+      "dueDate": '2024-10-07',
     },
   ];
 
@@ -105,7 +106,7 @@ class _InstClearanceState extends State<InstClearance>
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -121,7 +122,7 @@ class _InstClearanceState extends State<InstClearance>
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.business, size: 20),
+                              const Icon(Icons.class_, size: 20),
                               const SizedBox(width: 8),
                               Text(
                                 course['courseCode']!,
@@ -138,7 +139,7 @@ class _InstClearanceState extends State<InstClearance>
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: statusColor.withOpacity(0.1),
+                              color: statusColor.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
@@ -163,9 +164,18 @@ class _InstClearanceState extends State<InstClearance>
                         ],
                       ),
                       const SizedBox(height: 12),
-                      _buildInfoRow('Section', course['section']!),
-                      _buildInfoRow('Requirements', course['requirements']!),
-                      _buildInfoRow('Instructor', course['instructor']!),
+                      InfoRow(
+                          icon: Icons.person,
+                          label: 'Instructor',
+                          value: course['instructor']!),
+                      InfoRow(
+                          icon: Icons.assignment,
+                          label: 'Requirements',
+                          value: course['requirements']!),
+                      InfoRow(
+                          icon: Icons.schedule,
+                          label: 'Due Date',
+                          value: course['dueDate']!),
                     ],
                   ),
                 ),
@@ -179,7 +189,7 @@ class _InstClearanceState extends State<InstClearance>
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -188,14 +198,14 @@ class _InstClearanceState extends State<InstClearance>
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
-                headingRowColor: MaterialStateProperty.all(
+                headingRowColor: WidgetStateProperty.all(
                   theme.primaryColor,
                 ),
                 headingTextStyle: GoogleFonts.outfit(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                 ),
-                dataRowColor: MaterialStateProperty.all(Colors.white),
+                dataRowColor: WidgetStateProperty.all(Colors.white),
                 columns: const [
                   DataColumn(
                     label: Row(
@@ -267,7 +277,7 @@ class _InstClearanceState extends State<InstClearance>
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: statusColor.withOpacity(0.1),
+                            color: statusColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -293,28 +303,5 @@ class _InstClearanceState extends State<InstClearance>
               ),
             ),
           );
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Text(
-            '$label: ',
-            style: GoogleFonts.outfit(
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
-          ),
-          Text(
-            value,
-            style: GoogleFonts.outfit(
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

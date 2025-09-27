@@ -13,27 +13,53 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _userController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _cpasswordController = TextEditingController();
+  final TextEditingController _studentIdController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _cpasswordController = TextEditingController();
+
+  // NDA acceptance state
+  bool _isNDAAccepted = false;
 
   void _signUp() async {
-    String username = _userController.text.trim();
+    // Validate NDA acceptance
+    if (!_isNDAAccepted) {
+      showSnackBar(
+          context, "Please accept the Non-Disclosure Agreement to continue.");
+      return;
+    }
+
+    String studentId = _studentIdController.text.trim();
+    String firstName = _firstNameController.text.trim();
+    String lastName = _lastNameController.text.trim();
+    String email = _emailController.text.trim();
+    String phoneNumber = _phoneController.text.trim();
     String password = _passwordController.text.trim();
 
     Authentication auth = Authentication();
     String result = await auth.signUp(
       context: context,
-      username: username,
+      studentId: studentId,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
       password: password,
     );
+
+    if (!mounted) return;
 
     if (result != "Success") {
       showSnackBar(context, result);
       // Clear input fields on successful registration
-      _userController.clear();
+      _studentIdController.clear();
+      _firstNameController.clear();
+      _lastNameController.clear();
+      _emailController.clear();
+      _phoneController.clear();
       _passwordController.clear();
     } else {
       // Show error message but do NOT navigate
@@ -52,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: SingleChildScrollView(
           // Prevents overflow when keyboard appears
           // reverse: true,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -72,18 +98,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           TextFieldInput(
                             icon: Icons.badge,
-                            textEditingController: _userController,
+                            textEditingController: _studentIdController,
                             hintText: 'Enter your id number',
                             textInputType: TextInputType.text,
                             width: textFieldWidth,
                           ),
-
+                          TextFieldInput(
+                            icon: Icons.person,
+                            textEditingController: _firstNameController,
+                            hintText: 'Enter Given Name',
+                            textInputType: TextInputType.text,
+                            width: textFieldWidth,
+                          ),
+                          TextFieldInput(
+                            icon: Icons.person,
+                            textEditingController: _lastNameController,
+                            hintText: 'Enter Last Name',
+                            textInputType: TextInputType.text,
+                            width: textFieldWidth,
+                          ),
                           TextFieldInput(
                             icon: Icons.email,
                             textEditingController: _emailController,
                             hintText: 'Enter your email',
                             textInputType: TextInputType.emailAddress,
-                            isPass: true,
                             width: textFieldWidth,
                           ),
                           TextFieldInput(
@@ -91,7 +129,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textEditingController: _phoneController,
                             hintText: 'Enter your phone number',
                             textInputType: TextInputType.text,
-                            isPass: true,
                             width: textFieldWidth,
                           ),
                           TextFieldInput(
@@ -114,6 +151,63 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       );
                     },
                   ),
+                  const SizedBox(height: 10),
+// Non-Disclosure Agreement Acknowledgment
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey[300]!),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Non-Disclosure Agreement',
+                          style: GoogleFonts.outfit(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'By creating an account, you agree to maintain confidentiality of all information accessed through this platform.',
+                          style: GoogleFonts.outfit(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: _isNDAAccepted,
+                              onChanged: (value) {
+                                setState(() {
+                                  _isNDAAccepted = value ?? false;
+                                });
+                              },
+                              activeColor: Colors.blue,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'I acknowledge and agree to the NDA terms',
+                                style: GoogleFonts.outfit(
+                                  fontSize: 14,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
                   const SizedBox(height: 20),
                   // Fix Button Overflow
                   LayoutBuilder(
@@ -164,10 +258,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 60), // Extra spacing
               MediaQuery.of(context).viewInsets.bottom == 0
                   ? Image.asset(
-                    'images/mobile.png',
-                    fit: BoxFit.contain,
-                    height: height * 0.15, // Adjust height dynamically
-                  )
+                      'images/mobile.png',
+                      fit: BoxFit.contain,
+                      height: height * 0.15, // Adjust height dynamically
+                    )
                   : const SizedBox(),
             ],
           ),

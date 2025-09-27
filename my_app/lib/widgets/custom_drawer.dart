@@ -15,18 +15,17 @@ class CustomDrawer extends StatelessWidget {
     return SizedBox(
       width: Responsive.isDesktop(context) ? 230.w : null,
       child: Drawer(
-        shape:
-            Responsive.isDesktop(context)
-                ? RoundedRectangleBorder(
-                  borderRadius: BorderRadius.horizontal(
-                    right: Radius.circular(5), // Rounded edges on mobile
-                  ),
-                ) // No rounding on desktop
-                : RoundedRectangleBorder(
-                  borderRadius: BorderRadius.horizontal(
-                    right: Radius.circular(16), // Rounded edges on mobile
-                  ),
+        shape: Responsive.isDesktop(context)
+            ? const RoundedRectangleBorder(
+                borderRadius: BorderRadius.horizontal(
+                  right: Radius.circular(5), // Rounded edges on mobile
                 ),
+              ) // No rounding on desktop
+            : const RoundedRectangleBorder(
+                borderRadius: BorderRadius.horizontal(
+                  right: Radius.circular(16), // Rounded edges on mobile
+                ),
+              ),
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -64,7 +63,7 @@ class CustomDrawer extends StatelessWidget {
             //   ),
             // ),
             // Profile Section
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text('John Doe'),
               accountEmail: Text('john.doe@example.com'),
               currentAccountPicture: CircleAvatar(
@@ -134,10 +133,10 @@ Widget _buildDrawerItem(
   IconData icon,
   String title,
   dynamic
-  navigationTarget, // This can be either an index (int) or a route (String)
+      navigationTarget, // This can be either an index (int) or a route (String)
   BuildContext context,
   Function(int)
-  onItemTapped, // Keep the original onItemTapped for index-based navigation
+      onItemTapped, // Keep the original onItemTapped for index-based navigation
   bool isDesktop,
 ) {
   return ListTile(

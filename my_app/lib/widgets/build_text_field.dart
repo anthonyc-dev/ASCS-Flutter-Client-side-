@@ -26,7 +26,7 @@ class BuildTextField extends StatelessWidget {
         cursorColor: Colors.white,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white.withOpacity(0.2),
+          fillColor: Colors.white.withValues(alpha: 0.2),
           prefixIcon: Icon(icon, color: Colors.white),
           hintText: hintText,
           hintStyle: GoogleFonts.outfit(color: Colors.white70),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/screens/nonifiocation.dart';
@@ -19,7 +20,7 @@ class BuildMobileLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      extendBody: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -29,7 +30,7 @@ class BuildMobileLayout extends StatelessWidget {
               radius: 20,
               backgroundColor: Colors.grey[200],
               backgroundImage: const NetworkImage(
-                  'https://media.istockphoto.com/id/1501770003/photo/happy-handsome-young-indian-man-head-shot-front-portrait.jpg?s=612x612&w=0&k=20&c=P2toTbaknymA7vf28IQNa-3xrlUjPXLFqvN2Zra8_nw='),
+                  'https://randomuser.me/api/portraits/men/32.jpg'),
               // child: const Icon(
               //   Icons.person,
               //   color: Colors.grey,
@@ -94,21 +95,39 @@ class BuildMobileLayout extends StatelessWidget {
                   color: Colors.black87,
                 ),
                 onPressed: () {
-                  // Add your share logic here
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Share'),
+                      content: const Text('Share button clicked!'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
               MenuAnchorWidget(
                 onProfile: () {
                   // Navigator.pushNamed(context, '/profile');
-                  print("Profile clicked");
+                  if (kDebugMode) {
+                    print("Profile clicked");
+                  }
                 },
                 onSettings: () {
                   // Navigator.pushNamed(context, '/settings');
-                  print("Settings clicked");
+                  if (kDebugMode) {
+                    print("Settings clicked");
+                  }
                 },
                 onNotification: () {
                   // Navigator.pushNamed(context, '/notif');
-                  print("Notification clicked");
+                  if (kDebugMode) {
+                    print("Notification clicked");
+                  }
                 },
               ),
             ],

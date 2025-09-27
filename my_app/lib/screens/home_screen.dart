@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/layouts/build_mobile_layout.dart';
 import 'package:my_app/layouts/build_desktop_layout.dart';
 import 'package:my_app/screens/dept_clearance.dart';
+import 'package:my_app/screens/events.dart';
 import 'package:my_app/screens/home_dashboard.dart';
 import 'package:my_app/screens/profile_screen.dart';
-import 'package:my_app/screens/sms_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,8 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const HomeDashboard(),
     const DeptClearance(),
-    const SmsScreen(),
-    const ProfileScreen(),
+    EventsPage(),
+    const StudentProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

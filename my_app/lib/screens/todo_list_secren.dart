@@ -45,42 +45,42 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                   style: GoogleFonts.outfit(),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: _addTask,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black, // Set background color
                   foregroundColor: Colors.white, // Set text color
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
                 child: Text('Add', style: GoogleFonts.outfit()),
               ),
             ],
           ),
           Expanded(
-            child:
-                tasks.isEmpty
-                    ? Center(
-                      child: Text(
-                        'No tasks added.',
-                        style: GoogleFonts.outfit(),
-                      ),
-                    )
-                    : ListView.builder(
-                      itemCount: tasks.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(
-                            tasks[index],
-                            style: GoogleFonts.outfit(),
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () => _removeTask(index),
-                          ),
-                        );
-                      },
+            child: tasks.isEmpty
+                ? Center(
+                    child: Text(
+                      'No tasks added.',
+                      style: GoogleFonts.outfit(),
                     ),
+                  )
+                : ListView.builder(
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          tasks[index],
+                          style: GoogleFonts.outfit(),
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => _removeTask(index),
+                        ),
+                      );
+                    },
+                  ),
           ),
         ],
       ),

@@ -9,36 +9,140 @@ class CustomBottomNavigation extends StatelessWidget {
     required this.selectedIndex,
     required this.onItemTapped,
   });
+
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      selectedIndex: selectedIndex,
-      onDestinationSelected: onItemTapped,
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      indicatorColor: Theme.of(context).colorScheme.secondaryContainer,
-      // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.home_outlined),
-          selectedIcon: Icon(Icons.home),
-          label: 'Home',
+    final colorScheme = Theme.of(context).colorScheme;
+    const Color selectedBlue = Color(0xFF0A84FF);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 18,
+            offset: const Offset(0, -4),
+          ),
+        ],
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(22),
+          topRight: Radius.circular(22),
         ),
-        NavigationDestination(
-          icon: Icon(Icons.description_outlined),
-          selectedIcon: Icon(Icons.description),
-          label: 'Clearances',
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 8, left: 6, right: 6),
+          child: NavigationBar(
+            height: 65,
+            selectedIndex: selectedIndex,
+            onDestinationSelected: onItemTapped,
+            backgroundColor: Colors.transparent,
+            indicatorColor:
+                colorScheme.secondaryContainer.withValues(alpha: 0.92),
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            elevation: 0,
+            animationDuration: const Duration(milliseconds: 400),
+            destinations: [
+              NavigationDestination(
+                icon: _AnimatedNavIcon(
+                  icon: Icons.home_outlined,
+                  selectedIcon: Icons.home,
+                  selected: selectedIndex == 0,
+                  color:
+                      selectedIndex == 0 ? selectedBlue : colorScheme.primary,
+                  selectedColor: selectedBlue,
+                ),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: _AnimatedNavIcon(
+                  icon: Icons.description_outlined,
+                  selectedIcon: Icons.description,
+                  selected: selectedIndex == 1,
+                  color:
+                      selectedIndex == 1 ? selectedBlue : colorScheme.primary,
+                  selectedColor: selectedBlue,
+                ),
+                label: 'Clearances',
+              ),
+              NavigationDestination(
+                icon: _AnimatedNavIcon(
+                  icon: Icons.event_available_outlined,
+                  selectedIcon: Icons.event_available,
+                  selected: selectedIndex == 2,
+                  color:
+                      selectedIndex == 2 ? selectedBlue : colorScheme.primary,
+                  selectedColor: selectedBlue,
+                ),
+                label: 'Events',
+              ),
+              NavigationDestination(
+                icon: _AnimatedNavIcon(
+                  icon: Icons.person_outline,
+                  selectedIcon: Icons.person,
+                  selected: selectedIndex == 3,
+                  color:
+                      selectedIndex == 3 ? selectedBlue : colorScheme.primary,
+                  selectedColor: selectedBlue,
+                ),
+                label: 'Profile',
+              ),
+            ],
+          ),
         ),
-        NavigationDestination(
-          icon: Icon(Icons.event_available_outlined),
-          selectedIcon: Icon(Icons.event_available),
-          label: 'Events',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.person_outline),
-          selectedIcon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
+      ),
+    );
+  }
+}
+
+class _AnimatedNavIcon extends StatelessWidget {
+  final IconData icon;
+  final IconData selectedIcon;
+  final bool selected;
+  final Color color;
+  final Color? selectedColor;
+
+  const _AnimatedNavIcon({
+    required this.icon,
+    required this.selectedIcon,
+    required this.selected,
+    required this.color,
+    this.selectedColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final Color iconColor =
+        selected ? (selectedColor ?? color) : Colors.grey[500]!;
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 350),
+      curve: Curves.easeOutCubic,
+      padding: EdgeInsets.symmetric(
+        vertical: selected ? 2 : 0,
+        horizontal: selected ? 2 : 0,
+      ),
+      decoration: selected
+          ? BoxDecoration(
+              color: iconColor.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(12),
+            )
+          : null,
+      child: Icon(
+        selected ? selectedIcon : icon,
+        color: iconColor,
+        size: selected ? 30 : 25,
+        shadows: selected
+            ? [
+                Shadow(
+                  color: iconColor.withValues(alpha: 0.18),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ]
+            : [],
+      ),
     );
   }
 }

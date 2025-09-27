@@ -19,34 +19,20 @@ class CourseDetailsScreen extends StatelessWidget {
           style: GoogleFonts.outfit(
             fontWeight: FontWeight.w700,
             fontSize: 22,
-            color: Colors.white,
+            color: Colors.black87,
             letterSpacing: 0.5,
           ),
         ),
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1976D2), Color(0xFF64B5F6)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
       ),
       body: Stack(
         children: [
           // Background gradient
           Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF1976D2), Color(0xFF64B5F6)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: Color(0xFFF5F7FA),
             ),
           ),
           // Main content
@@ -58,7 +44,7 @@ class CourseDetailsScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28),
                 ),
-                shadowColor: Colors.blueAccent.withOpacity(0.2),
+                shadowColor: Colors.blueAccent.withValues(alpha: 0.2),
                 child: Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Column(
@@ -73,8 +59,8 @@ class CourseDetailsScreen extends StatelessWidget {
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
                                 colors: [
-                                  Colors.blueAccent.withOpacity(0.15),
-                                  Colors.blueAccent.withOpacity(0.05)
+                                  Colors.blueAccent.withValues(alpha: 0.15),
+                                  Colors.blueAccent.withValues(alpha: 0.05)
                                 ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
@@ -103,7 +89,8 @@ class CourseDetailsScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  course['courseName'] ?? '',
+                                  course['courseName'] ??
+                                      'BS Computer Science ',
                                   style: GoogleFonts.outfit(
                                     fontSize: 18,
                                     color: Colors.grey[700],
@@ -122,7 +109,7 @@ class CourseDetailsScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 18, vertical: 10),
                         decoration: BoxDecoration(
-                          color: statusColor.withOpacity(0.08),
+                          color: statusColor.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -374,7 +361,7 @@ class _GradientButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: gradient.colors.first.withOpacity(0.18),
+            color: gradient.colors.first.withValues(alpha: 0.18),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),

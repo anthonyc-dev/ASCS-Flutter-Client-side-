@@ -1,116 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart'; // For formatting dates
+import 'package:my_app/widgets/event/event_card.dart';
 
-class Event extends StatelessWidget {
-  const Event({super.key});
+class EventsPage extends StatelessWidget {
+  EventsPage({super.key});
+
+  final List<Map<String, dynamic>> events = [
+    {
+      "title": "Parents Meeting",
+      "description":
+          "Please tell your parents about the upcoming meeting. Attendance is a must.",
+      "date": "Apr 10, 2025 • 6:30 PM",
+    },
+    {
+      "title": "Sports Day",
+      "description":
+          "Join us for an exciting sports day filled with fun games!",
+      "date": "May 2, 2025 • 9:00 AM",
+    },
+    {
+      "title": "Graduation Ceremony",
+      "description": "Celebrate the achievements of our graduates with us.",
+      "date": "Jun 15, 2025 • 2:00 PM",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // Example event data (you would typically fetch this from a database)
-    String eventName = "Parents Meeting";
-    String venue = "NCMC Gym";
-    String description =
-        "Please tell your parents about the upcoming meeting. Attendance is a must.";
-    DateTime startDate = DateTime(2025, 4, 10, 18, 30); // Start Date with Time
-    DateTime endDate = DateTime(2025, 4, 12, 22, 0); // End Date with Time
-
-    // Date Format
-    final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-    final DateFormat timeFormat = DateFormat('HH:mm');
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Event Details", style: GoogleFonts.outfit()),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Card(
-            elevation: 5.0, // Add shadow to the card
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0), // Rounded corners
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Event Name with Icon
-                  _buildDetailText(
-                    label: 'Event Name',
-                    value: eventName,
-                    icon: Icons.event,
+      backgroundColor: Colors.grey[100],
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: events.length + 1, // +1 for the header card
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            // Header card with "Events" title
+            return Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF42a5f5), Color(0xFF1976D2)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blue.withOpacity(0.25),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6),
                   ),
-                  const SizedBox(height: 16),
-
-                  // Start Date and Time with Icon
-                  _buildDetailText(
-                    label: 'Start Date & Time',
-                    value:
-                        '${dateFormat.format(startDate)} ${timeFormat.format(startDate)}',
-                    icon: Icons.calendar_today,
-                  ),
-                  const SizedBox(height: 16),
-
-                  // End Date and Time with Icon
-                  _buildDetailText(
-                    label: 'End Date & Time',
-                    value:
-                        '${dateFormat.format(endDate)} ${timeFormat.format(endDate)}',
-                    icon: Icons.calendar_today,
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Venue with Icon
-                  _buildDetailText(
-                    label: 'Venue',
-                    value: venue,
-                    icon: Icons.location_on,
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Description with Icon
-                  _buildDetailText(
-                    label: 'Description',
-                    value: description,
-                    icon: Icons.description,
-                    maxLines: 5,
-                  ),
-                  const SizedBox(height: 20),
                 ],
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Reusable widget to display event details with an icon
-  Widget _buildDetailText({
-    required String label,
-    required String value,
-    required IconData icon,
-    int maxLines = 1,
-  }) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.blue),
-      title: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-          color: Colors.blue,
-        ),
-      ),
-      subtitle: Text(
-        value,
-        style: TextStyle(fontSize: 16, color: Colors.black.withOpacity(0.7)),
-        maxLines: maxLines,
-        overflow: TextOverflow.ellipsis,
+              child: Center(
+                child: Text(
+                  "Events",
+                  style: GoogleFonts.outfit(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            );
+          } else {
+            // Event cards
+            final event = events[index - 1];
+            return EventCard(event: event);
+          }
+        },
       ),
     );
   }

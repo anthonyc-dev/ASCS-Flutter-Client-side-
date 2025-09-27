@@ -234,8 +234,8 @@ class DashboardScreen extends StatelessWidget {
               percentage >= 80
                   ? Colors.green
                   : percentage >= 60
-                  ? Colors.orange
-                  : Colors.red,
+                      ? Colors.orange
+                      : Colors.red,
             ),
             borderRadius: BorderRadius.circular(4),
           ),
@@ -264,15 +264,13 @@ class PieChartPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width, size.height) * 0.4;
 
-    final clearedPaint =
-        Paint()
-          ..color = Colors.green
-          ..style = PaintingStyle.fill;
+    final clearedPaint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.fill;
 
-    final pendingPaint =
-        Paint()
-          ..color = Colors.orange
-          ..style = PaintingStyle.fill;
+    final pendingPaint = Paint()
+      ..color = Colors.orange
+      ..style = PaintingStyle.fill;
 
     final clearedAngle = (clearedPercentage / 100) * 2 * math.pi;
     final pendingAngle = (pendingPercentage / 100) * 2 * math.pi;

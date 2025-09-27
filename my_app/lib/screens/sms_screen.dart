@@ -15,7 +15,7 @@ class SmsScreen extends StatelessWidget {
             style: GoogleFonts.outfit(fontSize: 20),
           ),
           Text("Hello World!", style: GoogleFonts.outfit(fontSize: 10)),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -30,12 +30,12 @@ class SmsScreen extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black, // Set background color
               foregroundColor: Colors.white, // Set text color
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             ),
             child: Text('Notify Me One', style: GoogleFonts.outfit()),
           ),
           Padding(
-            padding: EdgeInsets.all(
+            padding: const EdgeInsets.all(
               16.0,
             ), // Adds 16 pixels padding on all sides
             child: ElevatedButton(
@@ -52,7 +52,8 @@ class SmsScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black, // Set background color
                 foregroundColor: Colors.white, // Set text color
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
               child: Text('Notify Me Two', style: GoogleFonts.outfit()),
             ),

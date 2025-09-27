@@ -24,22 +24,19 @@ class BuildDesktopLayout extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey, // Assign scaffold key for drawer control
       appBar: AppBar(
-        title:
-            Responsive.isDesktop(context)
-                ? Image.asset(
-                  'images/web.png', // Replace with your image path
-                  height: 150, // Adjust height as needed
-                  width: 150, // Optional: Adjust width
-                  fit:
-                      BoxFit
-                          .contain, // Ensures the image maintains its aspect ratio
-                )
-                : null,
+        title: Responsive.isDesktop(context)
+            ? Image.asset(
+                'images/web.png', // Replace with your image path
+                height: 150, // Adjust height as needed
+                width: 150, // Optional: Adjust width
+                fit: BoxFit
+                    .contain, // Ensures the image maintains its aspect ratio
+              )
+            : null,
         elevation: Responsive.isDesktop(context) ? 4.0 : 0.0,
-        shadowColor:
-            Responsive.isDesktop(context)
-                ? Colors.black.withOpacity(0.5)
-                : Colors.transparent,
+        shadowColor: Responsive.isDesktop(context)
+            ? Colors.black.withValues(alpha: 0.5)
+            : Colors.transparent,
 
         // Hide default drawer button on large screens
         actions: [
@@ -82,11 +79,10 @@ class BuildDesktopLayout extends StatelessWidget {
             ),
         ],
       ),
-      drawer:
-          !Responsive.isDesktop(context)
-              // Only show Drawer on small screens Mobile size
-              ? CustomDrawer(onItemTapped: onItemTapped)
-              : null, // Drawer should be null for wide screens
+      drawer: !Responsive.isDesktop(context)
+          // Only show Drawer on small screens Mobile size
+          ? CustomDrawer(onItemTapped: onItemTapped)
+          : null, // Drawer should be null for wide screens
 
       body: Row(
         children: [

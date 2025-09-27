@@ -11,7 +11,7 @@ class Authentication {
   //log in
   Future<String> login({
     required BuildContext context,
-    required String username,
+    required String email,
     required String password,
   }) async {
     try {
@@ -20,7 +20,7 @@ class Authentication {
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"username": username, "password": password}),
+        body: jsonEncode({"email": email, "password": password}),
       );
 
       if (response.statusCode == 200) {
@@ -52,7 +52,11 @@ class Authentication {
   //sign up
   Future<String> signUp({
     required BuildContext context,
-    required String username,
+    required String studentId,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String phoneNumber,
     required String password,
   }) async {
     try {
@@ -61,13 +65,22 @@ class Authentication {
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"username": username, "password": password}),
+        body: jsonEncode({
+          "studentId": studentId,
+          "firstName": firstName,
+          "lastName": lastName,
+          "email": email,
+          "phoneNumber": phoneNumber,
+          "password": password,
+          "role": "student",
+        }),
       );
 
       // Check if the response is successful
       if (response.statusCode == 200 || response.statusCode == 201) {
         var data = jsonDecode(response.body);
 
+        if (!context.mounted) return '';
         Navigator.pushReplacementNamed(context, "/signin");
         return data["message"] ?? "Registration successful!";
       } else {
