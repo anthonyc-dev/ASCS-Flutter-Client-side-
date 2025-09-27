@@ -49,11 +49,11 @@ class _SignInScreenJunkState extends State<SignInScreenJunk> {
       key: _scaffoldKey,
       child: Scaffold(
         body: GestureDetector(
-          onTap:
-              () => FocusScope.of(context).unfocus(), // Dismiss keyboard on tap
+          onTap: () =>
+              FocusScope.of(context).unfocus(), // Dismiss keyboard on tap
           child: Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/bg.jpeg'),
                 fit: BoxFit.cover,
