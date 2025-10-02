@@ -146,28 +146,32 @@ class HomeDashboard extends StatelessWidget {
                           subtitle: "View & Edit",
                           icon: Icons.person_rounded,
                           color: const Color(0xFF0A84FF),
-                          onTap: () {},
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/home/profile'),
                         ),
                         _buildModernCard(
                           title: "Clearances",
                           subtitle: "Track Progress",
                           icon: Icons.description_rounded,
                           color: const Color(0xFF10B981),
-                          onTap: () {},
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/home/clearance'),
                         ),
                         _buildModernCard(
                           title: "Events",
                           subtitle: "Upcoming",
                           icon: Icons.event_rounded,
                           color: const Color(0xFFF59E0B),
-                          onTap: () {},
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/home/event'),
                         ),
                         _buildModernCard(
                           title: "Notifications",
                           subtitle: "3 New",
                           icon: Icons.notifications_rounded,
                           color: const Color(0xFF8B5CF6),
-                          onTap: () {},
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/home/notif'),
                         ),
                       ],
                     ),

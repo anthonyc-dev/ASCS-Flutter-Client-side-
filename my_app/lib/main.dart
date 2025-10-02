@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_app/screens/auth/sign_in_screen.dart';
 import 'package:my_app/screens/auth/signup_screen.dart';
 import 'package:my_app/screens/dashboard.dart';
+import 'package:my_app/screens/dept_clearance.dart';
 import 'package:my_app/screens/events.dart';
 import 'package:my_app/screens/home_dashboard.dart';
 import 'package:my_app/screens/home_screen.dart';
 import 'package:my_app/screens/nonifiocation.dart';
+import 'package:my_app/screens/profile_screen.dart';
 import 'package:my_app/screens/qr_code.dart';
 import 'package:my_app/utils/screen_size.dart';
 
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
             '/qrcode': (context) => const QrCode(),
             '/notif': (context) => const NotificationScreen(),
             '/dashboard': (context) => const DashboardScreen(),
+            '/profile': (context) => const StudentProfileScreen(),
+            '/clearance': (context) => const DeptClearance(),
           },
         );
       },
