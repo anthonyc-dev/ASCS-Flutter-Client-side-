@@ -18,7 +18,7 @@ class StudentProfileScreen extends StatelessWidget {
             Text(
               'Student Profile',
               style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 fontSize: 24,
                 color: Colors.black87,
                 letterSpacing: 1.2,
@@ -32,7 +32,7 @@ class StudentProfileScreen extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: themeColor.withOpacity(0.25),
+                    color: themeColor.withValues(alpha: 0.25),
                     blurRadius: 18,
                     offset: const Offset(0, 8),
                   ),
@@ -54,7 +54,7 @@ class StudentProfileScreen extends StatelessWidget {
             Text(
               'Anthony Crausus',
               style: GoogleFonts.poppins(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w700,
                 color: Colors.black87,
                 letterSpacing: 1.1,
@@ -74,13 +74,13 @@ class StudentProfileScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               decoration: BoxDecoration(
-                color: themeColor.withOpacity(0.08),
+                color: themeColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 'School ID: 2025001234',
                 style: GoogleFonts.poppins(
-                  fontSize: 15,
+                  fontSize: 14,
                   color: Colors.grey[700],
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.5,
@@ -97,7 +97,7 @@ class StudentProfileScreen extends StatelessWidget {
               label: Text(
                 'Edit Profile',
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -121,7 +121,7 @@ class StudentProfileScreen extends StatelessWidget {
                       width: 1, // Border width
                     ),
                     borderRadius: BorderRadius.circular(16)),
-                shadowColor: themeColor.withOpacity(0.2),
+                shadowColor: themeColor.withValues(alpha: 0.2),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -136,7 +136,7 @@ class StudentProfileScreen extends StatelessWidget {
                           Text(
                             'Details',
                             style: GoogleFonts.poppins(
-                              fontSize: 18,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
                               letterSpacing: 0.5,
@@ -168,7 +168,7 @@ class StudentProfileScreen extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(18),
                 ),
-                shadowColor: themeColor.withOpacity(0.18),
+                shadowColor: themeColor.withValues(alpha: 0.18),
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
@@ -269,9 +269,9 @@ class StudentProfileScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.13),
+            color: color.withValues(alpha: 0.13),
             borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: color.withOpacity(0.3), width: 1),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
           ),
           child: Row(
             children: [
