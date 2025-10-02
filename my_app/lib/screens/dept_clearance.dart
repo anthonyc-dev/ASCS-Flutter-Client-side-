@@ -16,7 +16,7 @@ class _DeptClearanceState extends State<DeptClearance>
   late TabController _tabController;
 
   // Dummy data for the table
-  final List<Map<String, String>> courseData = [
+  List<Map<String, String>> courseData = [
     {
       'courseCode': 'CS101',
       'requirements': 'Calculator program',
@@ -88,11 +88,23 @@ class _DeptClearanceState extends State<DeptClearance>
     super.dispose();
   }
 
+  // Refresh function
+  Future<void> _refreshData() async {
+    // Simulate network request delay
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Example:
+    // final updatedCourses = await ApiService.getCourses();
+    // setState(() => courseData = updatedCourses);
+
+    setState(() {
+      // For demo, we shuffle the list to simulate updated data
+      courseData.shuffle();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool isMobile = MediaQuery.of(context).size.width < 600;
-    final theme = Theme.of(context);
-
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
@@ -144,232 +156,68 @@ class _DeptClearanceState extends State<DeptClearance>
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Department Clearance Tab
-          isMobile
-              ? ListView.builder(
-                  padding: const EdgeInsets.only(
-                    left: 16,
-                    right: 16,
-                    top: 16,
-                    bottom:
-                        100, // Add bottom margin to show content above bottom navigation
-                  ),
-                  itemCount: courseData.length,
-                  itemBuilder: (context, index) {
-                    final course = courseData[index];
-                    Color statusColor = getStatusColor(course['status']!);
-                    IconData statusIcon = getStatusIcon(course['status']!);
+          // Department Clearance Tab with pull-to-refresh
+          RefreshIndicator(
+            onRefresh: _refreshData,
+            color: Colors.white, // color of the spinner
+            backgroundColor: Colors.blue,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(
+                left: 16,
+                right: 16,
+                top: 16,
+                bottom: 100,
+              ),
+              itemCount: courseData.length,
+              itemBuilder: (context, index) {
+                final course = courseData[index];
+                Color statusColor = getStatusColor(course['status']!);
+                IconData statusIcon = getStatusIcon(course['status']!);
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                CourseDetailsScreen(course: course),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            CourseDetailsScreen(course: course),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.class_, size: 20),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        course['courseCode']!,
-                                        style: GoogleFonts.outfit(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 6,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: statusColor.withValues(alpha: 0.1),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          statusIcon,
-                                          color: statusColor,
-                                          size: 16,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          course['status']!,
-                                          style: GoogleFonts.outfit(
-                                            color: statusColor,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
+                                  const Icon(Icons.class_, size: 20),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    course['courseCode']!,
+                                    style: GoogleFonts.outfit(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 12),
-                              InfoRow(
-                                icon: Icons.person,
-                                label: 'Instructor',
-                                value: course['instructor']!,
-                              ),
-                              InfoRow(
-                                icon: Icons.assignment,
-                                label: 'Requirements',
-                                value: course['requirements']!,
-                              ),
-                              InfoRow(
-                                icon: Icons.schedule,
-                                label: 'Due Date',
-                                value: course['dueDate']!,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                )
-              : Container(
-                  margin: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      headingRowColor: WidgetStateProperty.all(
-                        theme.primaryColor,
-                      ),
-                      headingTextStyle: GoogleFonts.outfit(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      dataRowColor: WidgetStateProperty.all(Colors.white),
-                      columns: const [
-                        DataColumn(
-                          label: Row(
-                            children: [
-                              Icon(Icons.class_, color: Colors.white),
-                              SizedBox(width: 8),
-                              Text('Course Code'),
-                            ],
-                          ),
-                        ),
-                        DataColumn(
-                          label: Row(
-                            children: [
-                              Icon(Icons.group, color: Colors.white),
-                              SizedBox(width: 8),
-                              Text('Section'),
-                            ],
-                          ),
-                        ),
-                        DataColumn(
-                          label: Row(
-                            children: [
-                              Icon(Icons.assignment, color: Colors.white),
-                              SizedBox(width: 8),
-                              Text('Requirements'),
-                            ],
-                          ),
-                        ),
-                        DataColumn(
-                          label: Row(
-                            children: [
-                              Icon(Icons.person, color: Colors.white),
-                              SizedBox(width: 8),
-                              Text('Instructor'),
-                            ],
-                          ),
-                        ),
-                        DataColumn(
-                          label: Row(
-                            children: [
-                              Icon(Icons.info, color: Colors.white),
-                              SizedBox(width: 8),
-                              Text('Status'),
-                            ],
-                          ),
-                        ),
-                      ],
-                      rows: courseData.map((course) {
-                        Color statusColor = getStatusColor(course['status']!);
-                        IconData statusIcon = getStatusIcon(course['status']!);
-                        return DataRow(
-                          cells: [
-                            DataCell(Row(
-                              children: [
-                                const Icon(Icons.class_, size: 16),
-                                const SizedBox(width: 8),
-                                Text(course['courseCode']!),
-                              ],
-                            )),
-                            DataCell(Row(
-                              children: [
-                                const Icon(Icons.group, size: 16),
-                                const SizedBox(width: 8),
-                                Text(course['section']!),
-                              ],
-                            )),
-                            DataCell(Row(
-                              children: [
-                                const Icon(Icons.assignment, size: 16),
-                                const SizedBox(width: 8),
-                                Text(course['requirements']!),
-                              ],
-                            )),
-                            DataCell(Row(
-                              children: [
-                                const Icon(Icons.person, size: 16),
-                                const SizedBox(width: 8),
-                                Text(course['instructor']!),
-                              ],
-                            )),
-                            DataCell(Row(
-                              children: [
-                                const Icon(Icons.person, size: 16),
-                                const SizedBox(width: 8),
-                                Text(course['dueDate']!),
-                              ],
-                            )),
-                            DataCell(
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 12,
@@ -390,18 +238,40 @@ class _DeptClearanceState extends State<DeptClearance>
                                     const SizedBox(width: 4),
                                     Text(
                                       course['status']!,
-                                      style: TextStyle(color: statusColor),
+                                      style: GoogleFonts.outfit(
+                                        color: statusColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      }).toList(),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          InfoRow(
+                            icon: Icons.person,
+                            label: 'Instructor',
+                            value: course['instructor']!,
+                          ),
+                          InfoRow(
+                            icon: Icons.assignment,
+                            label: 'Requirements',
+                            value: course['requirements']!,
+                          ),
+                          InfoRow(
+                            icon: Icons.schedule,
+                            label: 'Due Date',
+                            value: course['dueDate']!,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                );
+              },
+            ),
+          ),
 
           // Institutional Clearance Tab
           const Center(
