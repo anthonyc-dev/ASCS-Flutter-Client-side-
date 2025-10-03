@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/widgets/menu_anchor.dart';
 
 class StudentProfileScreen extends StatelessWidget {
   const StudentProfileScreen({super.key});
@@ -10,22 +12,53 @@ class StudentProfileScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF6F8FA),
+      appBar: AppBar(
+        title: Text(
+          'Student Profile',
+          style: GoogleFonts.poppins(
+            fontSize: 21,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blue,
+        actions: [
+          MenuAnchorWidget(
+            onProfile: () {
+              // Navigator.pushNamed(context, '/profile');
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Share'),
+                  content: const Text('Share button clicked!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            onSettings: () {
+              // Navigator.pushNamed(context, '/settings');
+              if (kDebugMode) {
+                print("Settings clicked");
+              }
+            },
+            onNotification: () {
+              // Navigator.pushNamed(context, '/notif');
+              if (kDebugMode) {
+                print("Notification clicked");
+              }
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 20),
-            // Title moved from AppBar
-            Text(
-              'Student Profile',
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-                color: Colors.black87,
-                letterSpacing: 1.2,
-              ),
-            ),
-            const SizedBox(height: 20),
-
+            const SizedBox(height: 30),
             // Profile Picture with border and shadow
             Container(
               decoration: BoxDecoration(
@@ -55,7 +88,7 @@ class StudentProfileScreen extends StatelessWidget {
               'Anthony Crausus',
               style: GoogleFonts.poppins(
                 fontSize: 22,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
                 color: Colors.black87,
                 letterSpacing: 1.1,
               ),
@@ -78,7 +111,7 @@ class StudentProfileScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'School ID: 2025001234',
+                'School ID: 21-0882',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: Colors.grey[700],
@@ -168,7 +201,7 @@ class StudentProfileScreen extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(18),
                 ),
-                shadowColor: themeColor.withValues(alpha: 0.18),
+                shadowColor: themeColor.withValues(alpha: 0.2),
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(

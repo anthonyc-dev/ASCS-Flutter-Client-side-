@@ -113,8 +113,8 @@ class _DeptClearanceState extends State<DeptClearance>
         title: Text(
           'Clearance',
           style: GoogleFonts.outfit(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
@@ -166,7 +166,6 @@ class _DeptClearanceState extends State<DeptClearance>
                 left: 16,
                 right: 16,
                 top: 16,
-                bottom: 100,
               ),
               itemCount: courseData.length,
               itemBuilder: (context, index) {

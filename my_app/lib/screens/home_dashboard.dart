@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'dart:math' as math;
+import 'package:my_app/screens/nonifiocation.dart';
 
 class HomeDashboard extends StatelessWidget {
   const HomeDashboard({super.key});
@@ -8,183 +8,233 @@ class HomeDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // Modern Header with Stats
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF0A84FF), Color(0xFF64D2FF)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF0A84FF).withValues(alpha: 0.25),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Modern Header with Stats
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF0A84FF), Color(0xFF64D2FF)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Welcome Back!",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 0.5,
-                              ),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF0A84FF).withValues(alpha: 0.25),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome Back!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.5,
                             ),
-                            SizedBox(height: 4),
-                            Text(
-                              "John Doe • BSCS 3A",
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 3),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
                           ),
-                          child: CircleAvatar(
-                            radius: 28,
-                            backgroundColor: Colors.white,
-                            child: ClipOval(
-                              child: Image.asset(
-                                'images/old-logo.png',
-                                width: 56,
-                                height: 56,
+                          SizedBox(height: 4),
+                          Text(
+                            "John Doe • BSCS 3A",
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      // Actions (Notification + Profile Avatar)
+                      Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              padding:
+                                  EdgeInsets.zero, // remove default padding
+                              icon: const Icon(
+                                Icons.notifications,
+                                color: Colors.white,
+                                size: 26,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
+                                        const NotificationScreen(), // 👈 replace with your notif page widget
+                                    transitionsBuilder: (context, animation,
+                                        secondaryAnimation, child) {
+                                      const begin = Offset(
+                                          1.0, 0.0); // from right to left
+                                      const end = Offset.zero;
+                                      const curve = Curves.easeInOut;
+
+                                      var tween = Tween(begin: begin, end: end)
+                                          .chain(CurveTween(curve: curve));
+                                      var offsetAnimation =
+                                          animation.drive(tween);
+
+                                      return SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+
+                              splashRadius:
+                                  24, // keeps ripple neat inside circle
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                              image: const DecorationImage(
+                                image: NetworkImage(
+                                  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+                                ),
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-
-                    // Progress Overview Cards
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _buildProgressCard(
-                            title: "Clearance",
-                            percentage: 75,
-                            color: Colors.white,
-                            textColor: const Color(0xFF0A84FF),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: _buildProgressCard(
-                            title: "Requirements",
-                            percentage: 9,
-                            color: Colors.white,
-                            textColor: const Color(0xFF0A84FF),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // Main Content
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Quick Actions",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xFF1E293B),
-                        letterSpacing: 0.5,
+                          // Progress Overview Cards
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Enhanced Grid Menu
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 1.1,
-                      children: [
-                        _buildModernCard(
-                          title: "My Profile",
-                          subtitle: "View & Edit",
-                          icon: Icons.person_rounded,
-                          color: const Color(0xFF0A84FF),
-                          onTap: () =>
-                              Navigator.pushNamed(context, '/home/profile'),
-                        ),
-                        _buildModernCard(
-                          title: "Clearances",
-                          subtitle: "Track Progress",
-                          icon: Icons.description_rounded,
-                          color: const Color(0xFF10B981),
-                          onTap: () =>
-                              Navigator.pushNamed(context, '/home/clearance'),
-                        ),
-                        _buildModernCard(
-                          title: "Events",
-                          subtitle: "Upcoming",
-                          icon: Icons.event_rounded,
-                          color: const Color(0xFFF59E0B),
-                          onTap: () =>
-                              Navigator.pushNamed(context, '/home/event'),
-                        ),
-                        _buildModernCard(
-                          title: "Notifications",
-                          subtitle: "3 New",
-                          icon: Icons.notifications_rounded,
-                          color: const Color(0xFF8B5CF6),
-                          onTap: () =>
-                              Navigator.pushNamed(context, '/home/notif'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+
+            // Main Content
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildProgressCard(
+                          title: "Clearance",
+                          percentage: 75,
+                          color: Colors.white,
+                          textColor: const Color(0xFF0A84FF),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _buildProgressCard(
+                          title: "Requirements",
+                          percentage: 9,
+                          color: Colors.white,
+                          textColor: const Color(0xFF0A84FF),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25),
+                  const Text(
+                    "Quick Actions",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF1E293B),
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+
+                  // Enhanced Grid Menu
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 1.1,
+                    children: [
+                      _buildModernCard(
+                        title: "My Profile",
+                        subtitle: "View & Edit",
+                        icon: Icons.person_rounded,
+                        color: const Color(0xFF0A84FF),
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/home/profile'),
+                      ),
+                      _buildModernCard(
+                        title: "Clearances",
+                        subtitle: "Track Progress",
+                        icon: Icons.description_rounded,
+                        color: const Color(0xFF10B981),
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/home/clearance'),
+                      ),
+                      _buildModernCard(
+                        title: "Events",
+                        subtitle: "Upcoming",
+                        icon: Icons.event_rounded,
+                        color: const Color(0xFFF59E0B),
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/home/event'),
+                      ),
+                      _buildModernCard(
+                        title: "Notifications",
+                        subtitle: "3 New",
+                        icon: Icons.notifications_rounded,
+                        color: const Color(0xFF8B5CF6),
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/home/notif'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
+  // --- Progress Card ---
   Widget _buildProgressCard({
     required String title,
     required int percentage,
@@ -247,6 +297,7 @@ class HomeDashboard extends StatelessWidget {
     );
   }
 
+  // --- Modern Card ---
   Widget _buildModernCard({
     required String title,
     required String subtitle,

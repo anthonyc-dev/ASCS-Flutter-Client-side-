@@ -26,8 +26,8 @@ class CustomBottomNavigation extends StatelessWidget {
           ),
         ],
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(22),
-          topRight: Radius.circular(22),
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
         ),
       ),
       child: SafeArea(
@@ -78,16 +78,38 @@ class CustomBottomNavigation extends StatelessWidget {
                 label: 'Events',
               ),
               NavigationDestination(
-                icon: _AnimatedNavIcon(
-                  icon: Icons.person_outline,
-                  selectedIcon: Icons.person,
-                  selected: selectedIndex == 3,
-                  color:
-                      selectedIndex == 3 ? selectedBlue : colorScheme.primary,
-                  selectedColor: selectedBlue,
+                icon: Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color: Colors.blue.shade200, width: 2), // normal border
+                  ),
+                  child: ClipOval(
+                    child: Image.network(
+                      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                selectedIcon: Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color: Colors.blue, width: 2), // thicker when active
+                  ),
+                  child: ClipOval(
+                    child: Image.network(
+                      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 label: 'Profile',
-              ),
+              )
             ],
           ),
         ),
@@ -132,7 +154,7 @@ class _AnimatedNavIcon extends StatelessWidget {
       child: Icon(
         selected ? selectedIcon : icon,
         color: iconColor,
-        size: selected ? 30 : 25,
+        size: selected ? 25 : 25,
         shadows: selected
             ? [
                 Shadow(

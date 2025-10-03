@@ -1,8 +1,5 @@
-import 'dart:io' show Platform; // Import dart:io safely
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/layouts/build_mobile_layout.dart';
-import 'package:my_app/layouts/build_desktop_layout.dart';
 import 'package:my_app/screens/dept_clearance.dart';
 import 'package:my_app/screens/events.dart';
 import 'package:my_app/screens/home_dashboard.dart';
@@ -31,26 +28,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  bool get isDesktop {
-    try {
-      return kIsWeb || Platform.isWindows;
-    } catch (e) {
-      return kIsWeb; // Fallback for web where Platform.isWindows isn't available
-    }
-  }
+  // bool get isDesktop {
+  //   try {
+  //     return kIsWeb || Platform.isWindows;
+  //   } catch (e) {
+  //     return kIsWeb; // Fallback for web where Platform.isWindows isn't available
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return isDesktop
-        ? BuildDesktopLayout(
-            selectedIndex: _selectedIndex,
-            onItemTapped: _onItemTapped,
-            screens: _screens,
-          )
-        : BuildMobileLayout(
-            selectedIndex: _selectedIndex,
-            onItemTapped: _onItemTapped,
-            screens: _screens,
-          );
+    return BuildMobileLayout(
+      selectedIndex: _selectedIndex,
+      onItemTapped: _onItemTapped,
+      screens: _screens,
+    );
   }
 }

@@ -17,7 +17,7 @@ class MenuAnchorWidget extends StatelessWidget {
     return PopupMenuButton<int>(
       icon: const Icon(
         Icons.more_vert,
-        color: Colors.black87,
+        color: Colors.white,
       ),
       color: Colors.black,
       onSelected: (value) {
@@ -26,7 +26,19 @@ class MenuAnchorWidget extends StatelessWidget {
             if (onProfile != null) {
               onProfile!();
             } else {
-              Navigator.pushNamed(context, '/profile');
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Share'),
+                  content: const Text('Share button clicked!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
             }
             break;
           case 1:
@@ -50,9 +62,9 @@ class MenuAnchorWidget extends StatelessWidget {
           value: 0,
           child: Row(
             children: [
-              Icon(Icons.person, color: Colors.white),
+              Icon(Icons.share, color: Colors.white),
               SizedBox(width: 8),
-              Text('Profile', style: TextStyle(color: Colors.white)),
+              Text('Share', style: TextStyle(color: Colors.white)),
             ],
           ),
         ),
