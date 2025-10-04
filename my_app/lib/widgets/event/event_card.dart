@@ -16,7 +16,7 @@ class EventCard extends StatelessWidget {
     final String title = event['title'] ?? 'No Title';
     final String description = event['description'] ?? '';
     final String date = event['date'] ?? '';
-    final IconData icon = event['icon'] ?? Icons.calendar_today;
+    final String venue = event['venue'] ?? '';
     final Color iconColor = event['iconColor'] ?? Colors.blue;
     final Color buttonColor = event['buttonColor'] ?? Colors.blue;
 
@@ -62,10 +62,26 @@ class EventCard extends StatelessWidget {
             // Date Row
             Row(
               children: [
-                Icon(icon, size: 18, color: iconColor),
+                Icon(Icons.calendar_today, size: 18, color: iconColor),
                 const SizedBox(width: 6),
                 Text(
                   date,
+                  style: GoogleFonts.outfit(
+                    fontSize: 14,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+
+            // Venue Row
+            Row(
+              children: [
+                Icon(Icons.location_on, size: 18, color: iconColor),
+                const SizedBox(width: 6),
+                Text(
+                  venue,
                   style: GoogleFonts.outfit(
                     fontSize: 14,
                     color: Colors.blueGrey,

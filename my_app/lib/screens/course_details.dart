@@ -17,8 +17,6 @@ class CourseDetailsScreen extends StatelessWidget {
         title: Text(
           'Course Details',
           style: GoogleFonts.outfit(
-            fontWeight: FontWeight.w700,
-            fontSize: 22,
             color: Colors.black87,
             letterSpacing: 0.5,
           ),

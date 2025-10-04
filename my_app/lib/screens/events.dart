@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/widgets/event/event_card.dart';
+import 'package:my_app/widgets/menu_anchor.dart';
 
 class EventsPage extends StatelessWidget {
   EventsPage({super.key});
@@ -11,29 +13,34 @@ class EventsPage extends StatelessWidget {
       "description":
           "Please tell your parents about the upcoming meeting. Attendance is a must.",
       "date": "Apr 10, 2025 • 6:30 PM",
+      "venue": "Main Auditorium",
     },
     {
       "title": "Sports Day",
       "description":
           "Join us for an exciting sports day filled with fun games!",
       "date": "May 2, 2025 • 9:00 AM",
+      "venue": "Main Field",
     },
     {
       "title": "Graduation Ceremony",
       "description": "Celebrate the achievements of our graduates with us.",
       "date": "Jun 15, 2025 • 2:00 PM",
+      "venue": "Main Auditorium",
     },
     {
       "title": "Open House",
       "description":
           "Come and explore our campus and facilities. Meet our staff and students too!",
       "date": "Jul 1, 2025 • 10:00 AM",
+      "venue": "Main Auditorium",
     },
     {
       "title": "Welcome Back Party",
       "description":
           "Join us as we welcome back our students from the summer break. There will be food, drinks, and fun games!",
       "date": "Aug 24, 2025 • 3:00 PM",
+      "venue": "Main Auditorium",
     },
   ];
 
@@ -49,6 +56,38 @@ class EventsPage extends StatelessWidget {
               color: Colors.white,
             )),
         backgroundColor: Colors.blue,
+        actions: [
+          MenuAnchorWidget(
+            onProfile: () {
+              // Navigator.pushNamed(context, '/profile');
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Share'),
+                  content: const Text('Share button clicked!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            onSettings: () {
+              // Navigator.pushNamed(context, '/settings');
+              if (kDebugMode) {
+                print("Settings clicked");
+              }
+            },
+            onNotification: () {
+              // Navigator.pushNamed(context, '/notif');
+              if (kDebugMode) {
+                print("Notification clicked");
+              }
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),

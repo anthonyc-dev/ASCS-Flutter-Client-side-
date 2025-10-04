@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/nonifiocation.dart';
+import 'package:my_app/screens/search_screen.dart';
 
 class HomeDashboard extends StatelessWidget {
   const HomeDashboard({super.key});
@@ -15,11 +16,7 @@ class HomeDashboard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF0A84FF), Color(0xFF64D2FF)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                color: Colors.blue,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(15),
                   bottomRight: Radius.circular(15),
@@ -139,6 +136,41 @@ class HomeDashboard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 38), // spacing before search bar
+                  GestureDetector(
+                    onTap: () {
+                      // 👉 Navigate when the search bar is tapped
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const SearchScreen()), // replace with your page
+                      );
+                    },
+                    child: const AbsorbPointer(
+                      // prevents keyboard from opening
+                      child: TextField(
+                        readOnly: true, // avoids typing, acts like a button
+                        style: TextStyle(color: Colors.black87),
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12),
+                            ),
+                          ),
+                          hintText: "Search course...",
+                          hintStyle:
+                              TextStyle(color: Colors.grey), // gray hint text
+                          prefixIcon: Icon(Icons.search, color: Colors.grey),
+                          filled: true,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 8),
                 ],
               ),
             ),
