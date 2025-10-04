@@ -9,7 +9,7 @@ class QrCode extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Clearance QR Code", style: GoogleFonts.outfit()),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
       body: Padding(

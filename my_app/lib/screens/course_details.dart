@@ -182,7 +182,9 @@ class CourseDetailsScreen extends StatelessWidget {
       case 'cleared':
         return 'Cleared';
       case 'pending':
+        return 'Pending';
       case 'incomplete':
+        return 'In complete';
       case 'missing':
         return 'Missing';
       case 'notcleared':

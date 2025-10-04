@@ -21,76 +21,34 @@ class NotificationScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Section
-              Container(
-                margin: const EdgeInsets.only(bottom: 24),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(
-                        Icons.notifications_active,
-                        color: Colors.blueAccent,
-                        size: 28,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Recent Notifications',
-                            style: GoogleFonts.outfit(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.grey[800],
-                            ),
-                          ),
-                          Text(
-                            'Stay updated with important updates',
-                            style: GoogleFonts.lato(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
 
               // Notification Cards
-              const NotificationCard(
+              NotificationCard(
                 icon: Icons.access_alarm_rounded,
                 iconColor: Colors.orange,
                 message: 'The deadline for clearance has ended!',
                 timestamp: 'Just Now',
-                isUrgent: true,
+                isUrgent: false,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
 
-              const NotificationCard(
+              NotificationCard(
                 icon: Icons.check_circle_rounded,
                 iconColor: Colors.green,
                 message: 'You have been cleared!',
                 timestamp: '2 hours ago',
                 isUrgent: false,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
 
-              const NotificationCard(
+              NotificationCard(
                 icon: Icons.school_rounded,
                 iconColor: Colors.blue,
                 message: 'New course materials available',
