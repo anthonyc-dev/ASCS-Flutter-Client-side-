@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/screens/course_details.dart';
 import 'package:my_app/screens/inst_clearance.dart';
+import 'package:my_app/screens/qr_code.dart';
 import 'package:my_app/widgets/clearance/build_info_row.dart';
 
 class DeptClearance extends StatefulWidget {
@@ -118,6 +119,18 @@ class _DeptClearanceState extends State<DeptClearance>
             color: Colors.white,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.qr_code_2, size: 30),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QrCode()),
+              );
+            },
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
@@ -188,6 +201,11 @@ class _DeptClearanceState extends State<DeptClearance>
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
+                      gradient: LinearGradient(
+                        colors: [Colors.blue.shade50, Colors.white],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.1),
@@ -206,14 +224,15 @@ class _DeptClearanceState extends State<DeptClearance>
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.class_, size: 20),
+                                  const Icon(Icons.class_,
+                                      size: 20, color: Colors.blue),
                                   const SizedBox(width: 8),
                                   Text(
                                     course['courseCode']!,
                                     style: GoogleFonts.outfit(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey[700]),
                                   ),
                                 ],
                               ),

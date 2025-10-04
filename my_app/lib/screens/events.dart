@@ -4,10 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/widgets/event/event_card.dart';
 import 'package:my_app/widgets/menu_anchor.dart';
 
-class EventsPage extends StatelessWidget {
-  EventsPage({super.key});
+class EventsPage extends StatefulWidget {
+  const EventsPage({super.key});
 
-  final List<Map<String, dynamic>> events = [
+  @override
+  State<EventsPage> createState() => _EventsPageState();
+}
+
+class _EventsPageState extends State<EventsPage> {
+  // Move the events list inside the state class
+  List<Map<String, dynamic>> events = [
     {
       "title": "Parents Meeting",
       "description":
@@ -44,22 +50,31 @@ class EventsPage extends StatelessWidget {
     },
   ];
 
+  // Refresh function
+  Future<void> _refreshData() async {
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      events.shuffle(); // simulate data update
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text('Events',
-            style: GoogleFonts.outfit(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            )),
+        title: Text(
+          'Events',
+          style: GoogleFonts.outfit(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Colors.blue,
         actions: [
           MenuAnchorWidget(
             onProfile: () {
-              // Navigator.pushNamed(context, '/profile');
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -75,27 +90,26 @@ class EventsPage extends StatelessWidget {
               );
             },
             onSettings: () {
-              // Navigator.pushNamed(context, '/settings');
-              if (kDebugMode) {
-                print("Settings clicked");
-              }
+              if (kDebugMode) print("Settings clicked");
             },
             onNotification: () {
-              // Navigator.pushNamed(context, '/notif');
-              if (kDebugMode) {
-                print("Notification clicked");
-              }
+              if (kDebugMode) print("Notification clicked");
             },
           ),
         ],
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          final event = events[index];
-          return EventCard(event: event);
-        },
+      body: RefreshIndicator(
+        onRefresh: _refreshData,
+        color: Colors.white,
+        backgroundColor: Colors.blue,
+        child: ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            final event = events[index];
+            return EventCard(event: event);
+          },
+        ),
       ),
     );
   }

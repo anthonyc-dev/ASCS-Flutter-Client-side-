@@ -56,6 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Text("Search Courses",
             style: GoogleFonts.outfit(
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             )),
         backgroundColor: Colors.blue,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -84,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(
-                      color: Colors.grey, width: 2), // darker on focus
+                      color: Colors.blue, width: 2), // darker on focus
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -98,37 +99,97 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
           Expanded(
-            child: filteredCourses.isEmpty
-                ? const Center(
-                    child: Text(
-                      "No courses found",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+              child: filteredCourses.isEmpty
+                  ? const Center(
+                      child: Text(
+                        "No courses found",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: filteredCourses.length,
-                    itemBuilder: (context, index) {
-                      final course = filteredCourses[index];
-                      return ListTile(
-                        title: Text(course['courseCode'] ?? ''),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  CourseDetailsScreen(course: course),
+                    )
+                  : ListView.builder(
+                      itemCount: filteredCourses.length,
+                      padding: const EdgeInsets.all(16),
+                      itemBuilder: (context, index) {
+                        final course = filteredCourses[index];
+
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CourseDetailsScreen(course: course),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-          ),
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  colors: [Colors.blue.shade50, Colors.white],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  // Left icon or leading circle
+                                  Container(
+                                    width: 48,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue.shade100,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: const Icon(
+                                      Icons.book_rounded,
+                                      color: Colors.blue,
+                                      size: 28,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+
+                                  // Text content
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          course['courseCode'] ?? '',
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // Right arrow icon
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.grey,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )),
         ],
       ),
     );

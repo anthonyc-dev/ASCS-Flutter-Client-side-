@@ -25,7 +25,11 @@ class EventCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: Colors.white,
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade50, Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -62,7 +66,8 @@ class EventCard extends StatelessWidget {
             // Date Row
             Row(
               children: [
-                Icon(Icons.calendar_today, size: 18, color: iconColor),
+                Icon(Icons.calendar_today,
+                    size: 18, color: iconColor.withValues(alpha: 0.8)),
                 const SizedBox(width: 6),
                 Text(
                   date,
@@ -78,7 +83,8 @@ class EventCard extends StatelessWidget {
             // Venue Row
             Row(
               children: [
-                Icon(Icons.location_on, size: 18, color: iconColor),
+                Icon(Icons.location_on,
+                    size: 20, color: iconColor.withValues(alpha: 0.8)),
                 const SizedBox(width: 6),
                 Text(
                   venue,

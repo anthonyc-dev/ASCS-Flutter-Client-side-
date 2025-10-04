@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             '/home': (context) => const HomeScreen(),
             '/signin': (context) => const SignInScreen(),
             '/signup': (context) => const SignUpScreen(),
-            '/event': (context) => EventsPage(),
+            '/event': (context) => const EventsPage(),
             '/qrcode': (context) => const QrCode(),
             '/notif': (context) => const NotificationScreen(),
             '/dashboard': (context) => const DashboardScreen(),

@@ -119,6 +119,11 @@ class _InstClearanceState extends State<InstClearance>
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                gradient: LinearGradient(
+                  colors: [Colors.blue.shade50, Colors.white],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.1),
@@ -137,13 +142,15 @@ class _InstClearanceState extends State<InstClearance>
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.class_, size: 20),
+                            const Icon(Icons.class_,
+                                size: 20, color: Colors.blue),
                             const SizedBox(width: 8),
                             Text(
                               course['courseCode']!,
                               style: GoogleFonts.outfit(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
+                                color: Colors.grey[700],
                               ),
                             ),
                           ],
