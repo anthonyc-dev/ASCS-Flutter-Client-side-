@@ -13,17 +13,27 @@ import 'package:my_app/screens/home_screen.dart';
 import 'package:my_app/screens/nonifiocation.dart';
 import 'package:my_app/screens/profile_screen.dart';
 import 'package:my_app/screens/qr_code.dart';
+import 'package:my_app/screens/onboarding_screen.dart';
 import 'package:my_app/utils/screen_size.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
-  runApp(const MyApp());
+// onboarding remove if there have error
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+
+  runApp(MyApp(seenOnboarding: seenOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // const MyApp({super.key});
+
+// onboarding remove if there have error
+  final bool seenOnboarding;
+  const MyApp({Key? key, required this.seenOnboarding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +45,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'ASCS',
+          title: 'Automated Student Clearance System',
           theme: ThemeData(
             primarySwatch: Colors.blue,
             textTheme: const TextTheme(
@@ -46,7 +56,7 @@ class MyApp extends StatelessWidget {
               // Add other styles here as needed
             ),
           ),
-          initialRoute: '/login', //signin
+          initialRoute: seenOnboarding ? '/login' : '/onboarding', //signin
           routes: {
             '/homeDashboard': (context) => const HomeDashboard(),
             '/home': (context) => const HomeScreen(),
@@ -60,6 +70,7 @@ class MyApp extends StatelessWidget {
             '/clearance': (context) => const DeptClearance(),
             '/login': (context) => const LoginScreen(),
             '/register': (context) => const RegisterScreen(),
+            '/onboarding': (context) => const OnboardingScreen(),
           },
         );
       },

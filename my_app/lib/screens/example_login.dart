@@ -149,7 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(14),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  },
                   child: Text(
                     "Sign In",
                     style: GoogleFonts.poppins(
