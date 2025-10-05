@@ -6,6 +6,8 @@ import 'package:my_app/screens/auth/signup_screen.dart';
 import 'package:my_app/screens/dashboard.dart';
 import 'package:my_app/screens/dept_clearance.dart';
 import 'package:my_app/screens/events.dart';
+import 'package:my_app/screens/example_login.dart';
+import 'package:my_app/screens/example_register.dart';
 import 'package:my_app/screens/home_dashboard.dart';
 import 'package:my_app/screens/home_screen.dart';
 import 'package:my_app/screens/nonifiocation.dart';
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
               // Add other styles here as needed
             ),
           ),
-          initialRoute: '/home', //signin
+          initialRoute: '/login', //signin
           routes: {
             '/homeDashboard': (context) => const HomeDashboard(),
             '/home': (context) => const HomeScreen(),
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
             '/dashboard': (context) => const DashboardScreen(),
             '/profile': (context) => const StudentProfileScreen(),
             '/clearance': (context) => const DeptClearance(),
+            '/login': (context) => const LoginScreen(),
+            '/register': (context) => const RegisterScreen(),
           },
         );
       },

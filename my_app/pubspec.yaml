@@ -47,6 +47,8 @@ dependencies:
   flutter_launcher_icons: "^0.14.4"
   google_nav_bar: ^5.0.7
   line_icons: ^2.0.3
+  flutter_native_splash: ^2.4.6
+  font_awesome_flutter: ^10.10.0
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,15 @@ flutter_launcher_icons:
   macos:
     generate: true
     image_path: "images/microflux/MICRO FLUX LOGO LOGO ONLY.png"
+
+flutter_native_splash:
+  color: "#ffffff" # Background color (white in this example)
+  image: "images/microflux/MICRO FLUX LOGO LOGO ONLY TRANS.png" # Path to your splash image
+  android_12:
+    image: "images/microflux/MICRO FLUX LOGO LOGO ONLY TRANS.png"
+    icon_background_color: "#ffffff"
+  ios: true
+  web: false
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
