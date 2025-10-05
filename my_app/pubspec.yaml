@@ -62,20 +62,20 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "images/old-logo.png"
+  image_path: "images/microflux/MICRO FLUX LOGO LOGO ONLY.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "images/old-logo.png"
+    image_path: "images/microflux/MICRO FLUX LOGO LOGO ONLY.png"
     background_color: "#hexcode"
     theme_color: "#hexcode"
   windows:
     generate: true
-    image_path: "images/old-logo.png"
+    image_path: "images/microflux/MICRO FLUX LOGO LOGO ONLY.png"
     icon_size: 48 # min:48, max:256, default: 48
   macos:
     generate: true
-    image_path: "images/old-logo.png"
+    image_path: "images/microflux/MICRO FLUX LOGO LOGO ONLY.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -90,6 +90,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+    - images/microflux/
     - .env
     - fonts/
 
