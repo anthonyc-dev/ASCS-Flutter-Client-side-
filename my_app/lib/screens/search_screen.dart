@@ -135,11 +135,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
-                                gradient: LinearGradient(
-                                  colors: [Colors.blue.shade50, Colors.white],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
+                                color: Colors.white,
                               ),
                               child: Row(
                                 children: [
