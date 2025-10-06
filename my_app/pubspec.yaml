@@ -83,9 +83,9 @@ flutter_launcher_icons:
 
 flutter_native_splash:
   color: "#ffffff" # Background color (white in this example)
-  image: "images/microflux/MICRO FLUX LOGO LOGO ONLY TRANS.png" # Path to your splash image
+  image: "images/microflux/MICRO FLUX LOGO ONLY TRANS.png" # Path to your splash image
   android_12:
-    image: "images/microflux/MICRO FLUX LOGO LOGO ONLY TRANS.png"
+    image: "images/microflux/MICRO FLUX LOGO ONLY TRANS.png"
     icon_background_color: "#ffffff"
   ios: true
   web: false
