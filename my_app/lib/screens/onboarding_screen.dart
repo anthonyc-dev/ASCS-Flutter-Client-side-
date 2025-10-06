@@ -30,6 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       top: false,
       bottom: true,
       child: IntroductionScreen(
+        globalBackgroundColor: Colors.white,
         pages: [
           PageViewModel(
             title: "Welcome",
