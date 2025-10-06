@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_app/services/authentication.dart';
+import 'package:my_app/widgets/snackbar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,6 +14,33 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
   bool _obscurePassword = true;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    Authentication auth = Authentication();
+    String result = await auth.login(
+      context: context,
+      email: email,
+      password: password,
+    );
+
+    if (!mounted) return;
+
+    if (result != "Success") {
+      showSnackBar(context, result);
+
+      _emailController.clear();
+      _passwordController.clear();
+    } else {
+      // Show error message but do NOT navigate
+      showSnackBar(context, result);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // --- Email Field ---
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   labelText: "E-Mail",
                   labelStyle: GoogleFonts.poppins(
@@ -78,6 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // --- Password Field ---
               TextField(
+                controller: _passwordController,
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   labelText: "Password",
@@ -150,6 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   onPressed: () {
+                    // _login();
                     Navigator.pushReplacementNamed(context, '/home');
                   },
                   child: Text(

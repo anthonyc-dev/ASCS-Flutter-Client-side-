@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/widgets/snackbar.dart';
+import 'package:my_app/services/authentication.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -21,6 +23,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscurePassword = true;
   bool _obscureConfirm = true;
 
+  void _signUp() async {
+    // Validate NDA acceptance
+
+    String studentId = _studentIdController.text.trim();
+    String firstName = _firstNameController.text.trim();
+    String lastName = _lastNameController.text.trim();
+    String email = _emailController.text.trim();
+    String phoneNumber = _phoneController.text.trim();
+    String password = _passwordController.text.trim();
+
+    Authentication auth = Authentication();
+    String result = await auth.signUp(
+      context: context,
+      studentId: studentId,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
+    );
+
+    if (!mounted) return;
+
+    if (result != "Success") {
+      showSnackBar(context, result);
+      // Clear input fields on successful registration
+      _studentIdController.clear();
+      _firstNameController.clear();
+      _lastNameController.clear();
+      _emailController.clear();
+      _phoneController.clear();
+      _passwordController.clear();
+    } else {
+      // Show error message but do NOT navigate
+      showSnackBar(context, result);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     const Color primaryBlue = Color(0xFF0A84FF);
@@ -30,6 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        surfaceTintColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onPressed: () => Navigator.pop(context),
@@ -224,6 +265,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       return;
                     }
                     //  Handle register logic
+                    _signUp();
                   },
                   child: Text(
                     "Create Account",
