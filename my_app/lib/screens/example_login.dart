@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Image.asset(
-                  "images/microflux/MICRO FLUX LOGO ONLY TRANS.png",
+                  "images/microflux/MICRO FLUX ico.png",
                   height: 100,
                   width: 100,
                   fit: BoxFit.contain,
