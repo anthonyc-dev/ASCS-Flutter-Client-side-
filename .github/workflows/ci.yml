@@ -1,0 +1,39 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Set up Flutter
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      # 3️⃣ Debug - list repo structure
+      - name: List repo files
+        run: ls -R
+
+      # 4️⃣ Get Flutter dependencies
+      - name: Get Flutter packages
+        working-directory: my-app
+        run: flutter pub get
+
+      # 5️⃣ Analyze project
+      - name: Analyze project source
+        working-directory: my-app
+        run: flutter analyze
+
+      # 6️⃣ Run Flutter tests
+      - name: Run tests
+        working-directory: my-app
+        run: flutter test
